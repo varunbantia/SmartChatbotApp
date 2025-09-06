@@ -46,19 +46,17 @@
                 android:scaleType="centerInside" />
         </RelativeLayout>
 
-        <!-- Slide Text -->
         <TextView
             android:id="@+id/slideText"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="20dp"
-            android:gravity="center_vertical"
+            android:gravity="center"
             android:fontFamily="sans-serif-medium"
             android:text="Slide to Get Started"
             android:textColor="@android:color/white"
-            android:textSize="22sp"
-            android:textStyle="bold" />
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginStart="70dp" />
     </RelativeLayout>
 
 </RelativeLayout>
