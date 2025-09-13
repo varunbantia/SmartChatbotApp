@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.smartchatbot.R;
+import com.example.smartchatbot.auth.LoginActivity;
 import com.example.smartchatbot.auth.SignupActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -50,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
                 case MotionEvent.ACTION_UP:
                     if (v.getX() >= maxRight * 0.85) {
                         // Completed slide → Go to SignupActivity
-                        Intent intent = new Intent(MainActivity.this, SignupActivity.class);
+                        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                         startActivity(intent);
                         finish();
                     } else {
