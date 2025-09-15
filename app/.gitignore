@@ -1,1 +1,2 @@
-/build
+# Exclude sensitive Firebase credentials
+/app/google-services.json/build

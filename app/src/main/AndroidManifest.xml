@@ -12,6 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SmartChatBot">
         <activity
+            android:name=".auth.ResetPassword"
+            android:exported="false" />
+        <activity
+            android:name=".dashboard.HomeActivity"
+            android:exported="false" />
+        <activity
             android:name=".settings.SettingsActivity"
             android:exported="false" />
         <activity
@@ -27,29 +33,9 @@
             android:name=".auth.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.SplashActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activities.JobRecommendationActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activities.ProfileActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activities.ChatActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activities.HomeActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activities.SignupActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activities.LoginActivity"
-            android:exported="false" />
-        <activity
             android:name=".dashboard.MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.SmartChatBot">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
