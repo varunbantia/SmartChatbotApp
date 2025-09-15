@@ -12,6 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SmartChatBot">
         <activity
+            android:name=".auth.ResetPassword"
+            android:exported="false" />
+        <activity
+            android:name=".dashboard.HomeActivity"
+            android:exported="false" />
+        <activity
             android:name=".settings.SettingsActivity"
             android:exported="false" />
         <activity
@@ -28,8 +34,8 @@
             android:exported="false" />
         <activity
             android:name=".dashboard.MainActivity"
-            android:theme="@style/Theme.SmartChatBot"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.SmartChatBot">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
