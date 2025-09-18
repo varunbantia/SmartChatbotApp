@@ -1,14 +1,154 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/profileFragmentRoot"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".profile.ProfileFragment">
+    android:layout_height="wrap_content"
+    android:padding="24dp">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <!-- Card content -->
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:fillViewport="true"
+        android:background="@drawable/rounded_background"
+        android:elevation="8dp"
+        android:padding="24dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Title -->
+            <TextView
+                android:id="@+id/tvProfileTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Complete Your Profile"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:gravity="center"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Step 1: Name -->
+            <LinearLayout
+                android:id="@+id/step1Layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/etName"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:hint="Enter your name"
+                    android:padding="12dp"
+                    android:background="@drawable/edittext_bg"
+                    android:layout_marginBottom="12dp" />
+
+                <Button
+                    android:id="@+id/btnNext1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Next"
+                    android:backgroundTint="@color/app_primary_blue"
+                    android:textColor="@android:color/white" />
+            </LinearLayout>
+
+            <!-- Step 2: Email -->
+            <LinearLayout
+                android:id="@+id/step2Layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <EditText
+                    android:id="@+id/etEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:hint="Enter your email"
+                    android:inputType="textEmailAddress"
+                    android:padding="12dp"
+                    android:background="@drawable/edittext_bg"
+                    android:layout_marginBottom="12dp" />
+
+                <Button
+                    android:id="@+id/btnNext2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Next"
+                    android:backgroundTint="@color/app_primary_blue"
+                    android:textColor="@android:color/white" />
+            </LinearLayout>
+
+            <!-- Step 3: Phone -->
+            <LinearLayout
+                android:id="@+id/step3Layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <EditText
+                    android:id="@+id/etPhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:hint="Enter your phone number"
+                    android:inputType="phone"
+                    android:padding="12dp"
+                    android:background="@drawable/edittext_bg"
+                    android:layout_marginBottom="12dp" />
+
+                <Button
+                    android:id="@+id/btnNext3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Next"
+                    android:backgroundTint="@color/app_primary_blue"
+                    android:textColor="@android:color/white" />
+            </LinearLayout>
+
+            <!-- Step 4: Skills -->
+            <LinearLayout
+                android:id="@+id/step4Layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <EditText
+                    android:id="@+id/etSkills"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:hint="Enter your skills"
+                    android:padding="12dp"
+                    android:background="@drawable/edittext_bg"
+                    android:layout_marginBottom="12dp" />
+
+                <Button
+                    android:id="@+id/btnSubmit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Submit"
+                    android:backgroundTint="@color/app_primary_blue"
+                    android:textColor="@android:color/white" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Close X button -->
+    <ImageButton
+        android:id="@+id/btnCloseProfile"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="top|end"
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_close"
+        app:tint="@color/black"
+        android:contentDescription="Close" />
 
 </FrameLayout>
