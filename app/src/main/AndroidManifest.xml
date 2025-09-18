@@ -11,11 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SmartChatBot">
+
         <activity
-            android:name=".auth.ResetPassword"
-            android:exported="false" />
-        <activity
-            android:name=".dashboard.HomeActivity"
+            android:name=".dashboard.MainActivity"
             android:exported="false" />
         <activity
             android:name=".settings.SettingsActivity"
@@ -32,16 +30,20 @@
         <activity
             android:name=".auth.LoginActivity"
             android:exported="false" />
+
+        <!-- HomeActivity as Launcher -->
         <activity
-            android:name=".dashboard.MainActivity"
+            android:name=".dashboard.ChatbotActivity"
             android:exported="true"
-            android:theme="@style/Theme.SmartChatBot">
+            android:theme="@style/Theme.SmartChatBot"
+            android:windowSoftInputMode="adjustResize|stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>
