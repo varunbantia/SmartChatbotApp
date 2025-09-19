@@ -1,154 +1,177 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/profileFragmentRoot"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:padding="24dp">
+    android:layout_height="match_parent"
+    android:fillViewport="true">
 
-    <!-- Card content -->
-    <ScrollView
+    <LinearLayout
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:gravity="center_horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fillViewport="true"
-        android:background="@drawable/rounded_background"
-        android:elevation="8dp"
-        android:padding="24dp">
+        android:layout_height="wrap_content">
 
+        <!-- Close Button -->
+        <ImageButton
+            android:id="@+id/btnCloseProfile"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="end"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_close"
+            android:contentDescription="Close" />
+
+        <!-- STEP 1 – Basic Info -->
         <LinearLayout
+            android:id="@+id/step1Layout"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/etName"
+                android:hint="Full Name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/etEmail"
+                android:hint="Email"
+                android:inputType="textEmailAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/etPhone"
+                android:hint="Phone Number"
+                android:inputType="phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/etDob"
+                android:hint="Date of Birth"
+                android:focusable="false"
+                android:clickable="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/btnNext1"
+                android:text="Next"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <!-- STEP 2 – Skills & Education -->
+        <LinearLayout
+            android:id="@+id/step2Layout"
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:visibility="gone">
 
-            <!-- Title -->
-            <TextView
-                android:id="@+id/tvProfileTitle"
+            <EditText
+                android:id="@+id/etSkills"
+                android:hint="Skills (comma separated)"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Complete Your Profile"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:textColor="@color/black"
-                android:gravity="center"
-                android:layout_marginBottom="16dp" />
+                android:layout_height="wrap_content" />
 
-            <!-- Step 1: Name -->
-            <LinearLayout
-                android:id="@+id/step1Layout"
+            <EditText
+                android:id="@+id/etEducation"
+                android:hint="Highest Qualification"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_height="wrap_content" />
 
-                <EditText
-                    android:id="@+id/etName"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:hint="Enter your name"
-                    android:padding="12dp"
-                    android:background="@drawable/edittext_bg"
-                    android:layout_marginBottom="12dp" />
-
-                <Button
-                    android:id="@+id/btnNext1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Next"
-                    android:backgroundTint="@color/app_primary_blue"
-                    android:textColor="@android:color/white" />
-            </LinearLayout>
-
-            <!-- Step 2: Email -->
-            <LinearLayout
-                android:id="@+id/step2Layout"
+            <EditText
+                android:id="@+id/etLanguages"
+                android:hint="Languages Known"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:visibility="gone">
+                android:layout_height="wrap_content" />
 
-                <EditText
-                    android:id="@+id/etEmail"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:hint="Enter your email"
-                    android:inputType="textEmailAddress"
-                    android:padding="12dp"
-                    android:background="@drawable/edittext_bg"
-                    android:layout_marginBottom="12dp" />
-
-                <Button
-                    android:id="@+id/btnNext2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Next"
-                    android:backgroundTint="@color/app_primary_blue"
-                    android:textColor="@android:color/white" />
-            </LinearLayout>
-
-            <!-- Step 3: Phone -->
-            <LinearLayout
-                android:id="@+id/step3Layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:visibility="gone">
-
-                <EditText
-                    android:id="@+id/etPhone"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:hint="Enter your phone number"
-                    android:inputType="phone"
-                    android:padding="12dp"
-                    android:background="@drawable/edittext_bg"
-                    android:layout_marginBottom="12dp" />
-
-                <Button
-                    android:id="@+id/btnNext3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Next"
-                    android:backgroundTint="@color/app_primary_blue"
-                    android:textColor="@android:color/white" />
-            </LinearLayout>
-
-            <!-- Step 4: Skills -->
-            <LinearLayout
-                android:id="@+id/step4Layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:visibility="gone">
-
-                <EditText
-                    android:id="@+id/etSkills"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:hint="Enter your skills"
-                    android:padding="12dp"
-                    android:background="@drawable/edittext_bg"
-                    android:layout_marginBottom="12dp" />
-
-                <Button
-                    android:id="@+id/btnSubmit"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Submit"
-                    android:backgroundTint="@color/app_primary_blue"
-                    android:textColor="@android:color/white" />
-            </LinearLayout>
-
+            <Button
+                android:id="@+id/btnNext2"
+                android:text="Next"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
         </LinearLayout>
-    </ScrollView>
 
-    <!-- Close X button -->
-    <ImageButton
-        android:id="@+id/btnCloseProfile"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_gravity="top|end"
-        android:background="@android:color/transparent"
-        android:src="@drawable/ic_close"
-        app:tint="@color/black"
-        android:contentDescription="Close" />
+        <!-- STEP 3 – Experience & Preferences -->
+        <LinearLayout
+            android:id="@+id/step3Layout"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone">
 
-</FrameLayout>
+            <EditText
+                android:id="@+id/etExperience"
+                android:hint="Work Experience (in years or details)"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/etJobRole"
+                android:hint="Preferred Job Role"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/etLocation"
+                android:hint="Preferred Location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/btnNext3"
+                android:text="Next"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <!-- STEP 4 – Resume & Profile Picture -->
+        <LinearLayout
+            android:id="@+id/step4Layout"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:gravity="center_horizontal">
+
+            <ImageView
+                android:id="@+id/ivProfile"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:src="@drawable/ic_user"
+                android:contentDescription="Profile Image"
+                android:scaleType="centerCrop" />
+
+            <Button
+                android:id="@+id/btnUploadImage"
+                android:text="Upload Profile Image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/tvResume"
+                android:text="No resume selected"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp" />
+
+            <Button
+                android:id="@+id/btnUploadResume"
+                android:text="Upload Resume (PDF/DOC)"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/btnSubmit"
+                android:text="Submit Profile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp" />
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

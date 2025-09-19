@@ -1,149 +1,285 @@
 package com.example.smartchatbot.profile;
 
+import android.app.Activity;
+import android.app.DatePickerDialog;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.TextUtils;
-import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
-import android.widget.Toast;
+import android.widget.*;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.smartchatbot.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
 public class ProfileFragment extends Fragment {
 
+    // Step layouts
     private LinearLayout step1Layout, step2Layout, step3Layout, step4Layout;
-    private EditText etName, etEmail, etPhone, etSkills;
-    private Button btnNext1, btnNext2, btnNext3, btnSubmit;
-    private ImageButton btnClose;
+
+    // Step 1
+    private EditText etName, etEmail, etPhone, etDob;
+
+    // Step 2
+    private EditText etEducation, etSkills, etLanguages;
+
+    // Step 3
+    private EditText etExperience, etJobRole, etLocation;
+
+    // Step 4
+    private ImageView ivProfile;
+    private Button btnUploadImage, btnUploadResume, btnSubmit;
+
+    // Buttons
+    private Button btnNext1, btnNext2, btnNext3;
+    private ImageButton btnCloseProfile;
 
     // Firebase
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
+    private StorageReference storageRef;
+
+    // Uri for uploads
+    private Uri profileImageUri, resumeUri;
+
+    private static final int PICK_IMAGE_REQUEST = 1001;
+    private static final int PICK_RESUME_REQUEST = 1002;
+
+    public ProfileFragment() {}
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
-        // Initialize Firebase
+        // Firebase init
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
+        storageRef = FirebaseStorage.getInstance().getReference();
 
-        // Find Views
+        // Step layouts
         step1Layout = view.findViewById(R.id.step1Layout);
         step2Layout = view.findViewById(R.id.step2Layout);
         step3Layout = view.findViewById(R.id.step3Layout);
         step4Layout = view.findViewById(R.id.step4Layout);
 
+        // Step 1
         etName = view.findViewById(R.id.etName);
         etEmail = view.findViewById(R.id.etEmail);
         etPhone = view.findViewById(R.id.etPhone);
-        etSkills = view.findViewById(R.id.etSkills);
+        etDob = view.findViewById(R.id.etDob);
 
         btnNext1 = view.findViewById(R.id.btnNext1);
+
+        // Step 2
+        etEducation = view.findViewById(R.id.etEducation);
+        etSkills = view.findViewById(R.id.etSkills);
+        etLanguages = view.findViewById(R.id.etLanguages);
         btnNext2 = view.findViewById(R.id.btnNext2);
+
+        // Step 3
+        etExperience = view.findViewById(R.id.etExperience);
+        etJobRole = view.findViewById(R.id.etJobRole);
+        etLocation = view.findViewById(R.id.etLocation);
         btnNext3 = view.findViewById(R.id.btnNext3);
+
+        // Step 4
+        ivProfile = view.findViewById(R.id.ivProfile);
+        btnUploadImage = view.findViewById(R.id.btnUploadImage);
+        btnUploadResume = view.findViewById(R.id.btnUploadResume);
         btnSubmit = view.findViewById(R.id.btnSubmit);
 
-        btnClose = view.findViewById(R.id.btnCloseProfile);
-        btnClose.setOnClickListener(v -> closeFragment());
+        // Close
+        btnCloseProfile = view.findViewById(R.id.btnCloseProfile);
 
-        // Step navigation
+        // Listeners
+        etDob.setOnClickListener(v -> showDatePicker());
+
         btnNext1.setOnClickListener(v -> {
-            String name = etName.getText().toString().trim();
-            if (name.isEmpty()) {
-                etName.setError("Name is required");
-                return;
+            if (validateStep1()) {
+                step1Layout.setVisibility(View.GONE);
+                step2Layout.setVisibility(View.VISIBLE);
             }
-            showStep(2);
         });
 
         btnNext2.setOnClickListener(v -> {
-            String email = etEmail.getText().toString().trim();
-            if (email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                etEmail.setError("Valid email is required");
-                return;
+            if (validateStep2()) {
+                step2Layout.setVisibility(View.GONE);
+                step3Layout.setVisibility(View.VISIBLE);
             }
-            showStep(3);
         });
 
         btnNext3.setOnClickListener(v -> {
-            String phone = etPhone.getText().toString().trim();
-            if (phone.isEmpty() || phone.length() < 10) {
-                etPhone.setError("Valid phone number is required");
-                return;
+            if (validateStep3()) {
+                step3Layout.setVisibility(View.GONE);
+                step4Layout.setVisibility(View.VISIBLE);
             }
-            showStep(4);
         });
 
-        btnSubmit.setOnClickListener(v -> {
-            String skills = etSkills.getText().toString().trim();
-            if (skills.isEmpty()) {
-                etSkills.setError("Enter at least one skill");
-                return;
-            }
-            saveProfile();
-        });
+        btnUploadImage.setOnClickListener(v -> openImagePicker());
+        btnUploadResume.setOnClickListener(v -> openResumePicker());
+
+        btnSubmit.setOnClickListener(v -> saveProfileToFirebase());
+
+        btnCloseProfile.setOnClickListener(v -> requireActivity().getSupportFragmentManager().beginTransaction().remove(ProfileFragment.this).commit());
 
         return view;
     }
 
-    // Show specific step layout and hide others
-    private void showStep(int step) {
-        step1Layout.setVisibility(step == 1 ? View.VISIBLE : View.GONE);
-        step2Layout.setVisibility(step == 2 ? View.VISIBLE : View.GONE);
-        step3Layout.setVisibility(step == 3 ? View.VISIBLE : View.GONE);
-        step4Layout.setVisibility(step == 4 ? View.VISIBLE : View.GONE);
+    // Step validations
+    private boolean validateStep1() {
+        if (TextUtils.isEmpty(etName.getText())) {
+            etName.setError("Enter name");
+            return false;
+        }
+        if (TextUtils.isEmpty(etEmail.getText())) {
+            etEmail.setError("Enter email");
+            return false;
+        }
+        if (TextUtils.isEmpty(etPhone.getText())) {
+            etPhone.setError("Enter phone");
+            return false;
+        }
+        if (TextUtils.isEmpty(etDob.getText())) {
+            etDob.setError("Enter DOB");
+            return false;
+        }
+        return true;
     }
 
-    // Save profile data in Firestore
-    private void saveProfile() {
+    private boolean validateStep2() {
+        if (TextUtils.isEmpty(etEducation.getText())) {
+            etEducation.setError("Enter education");
+            return false;
+        }
+        if (TextUtils.isEmpty(etSkills.getText())) {
+            etSkills.setError("Enter skills");
+            return false;
+        }
+        if (TextUtils.isEmpty(etLanguages.getText())) {
+            etLanguages.setError("Enter languages");
+            return false;
+        }
+        return true;
+    }
+
+    private boolean validateStep3() {
+        if (TextUtils.isEmpty(etExperience.getText())) {
+            etExperience.setError("Enter experience");
+            return false;
+        }
+        if (TextUtils.isEmpty(etJobRole.getText())) {
+            etJobRole.setError("Enter job role");
+            return false;
+        }
+        if (TextUtils.isEmpty(etLocation.getText())) {
+            etLocation.setError("Enter location");
+            return false;
+        }
+        return true;
+    }
+
+    // Date picker
+    private void showDatePicker() {
+        final Calendar calendar = Calendar.getInstance();
+        DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(),
+                (view, year, month, dayOfMonth) ->
+                        etDob.setText(dayOfMonth + "/" + (month + 1) + "/" + year),
+                calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH));
+        datePickerDialog.show();
+    }
+
+    // Pickers
+    private void openImagePicker() {
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(intent, PICK_IMAGE_REQUEST);
+    }
+
+    private void openResumePicker() {
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.setType("application/pdf");
+        startActivityForResult(intent, PICK_RESUME_REQUEST);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode,
+                                 @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == Activity.RESULT_OK && data != null && data.getData() != null) {
+            if (requestCode == PICK_IMAGE_REQUEST) {
+                profileImageUri = data.getData();
+                ivProfile.setImageURI(profileImageUri);
+            } else if (requestCode == PICK_RESUME_REQUEST) {
+                resumeUri = data.getData();
+                Toast.makeText(getContext(), "Resume Selected", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    // Save to Firebase
+    private void saveProfileToFirebase() {
         String uid = mAuth.getCurrentUser() != null ? mAuth.getCurrentUser().getUid() : null;
         if (uid == null) {
-            Toast.makeText(getContext(), "User not authenticated", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "User not logged in", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        String name = etName.getText().toString().trim();
-        String email = etEmail.getText().toString().trim();
-        String phone = etPhone.getText().toString().trim();
-        String skills = etSkills.getText().toString().trim();
+        Map<String, Object> userProfile = new HashMap<>();
+        userProfile.put("name", etName.getText().toString());
+        userProfile.put("email", etEmail.getText().toString());
+        userProfile.put("phone", etPhone.getText().toString());
+        userProfile.put("dob", etDob.getText().toString());
+        userProfile.put("education", etEducation.getText().toString());
+        userProfile.put("skills", etSkills.getText().toString());
+        userProfile.put("languages", etLanguages.getText().toString());
+        userProfile.put("experience", etExperience.getText().toString());
+        userProfile.put("jobRole", etJobRole.getText().toString());
+        userProfile.put("location", etLocation.getText().toString());
 
-        Map<String, Object> userMap = new HashMap<>();
-        userMap.put("name", name);
-        userMap.put("email", email);
-        userMap.put("phone", phone);
-        userMap.put("skills", skills);
+        DocumentReference docRef = db.collection("users").document(uid);
 
-        db.collection("users").document(uid).set(userMap)
-                .addOnSuccessListener(aVoid -> {
-                    Toast.makeText(getContext(), "Profile saved successfully", Toast.LENGTH_SHORT).show();
-                    closeFragment();
-                })
-                .addOnFailureListener(e -> {
-                    Toast.makeText(getContext(), "Error saving profile: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                });
+        docRef.set(userProfile).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                uploadFiles(uid);
+            } else {
+                Toast.makeText(getContext(), "Error saving profile", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
-    // Close the fragment and hide the container
-    private void closeFragment() {
-        View containerView = requireActivity().findViewById(R.id.fragmentContainer);
-        containerView.setVisibility(View.GONE);
-        requireActivity().getSupportFragmentManager().popBackStack();
+    private void uploadFiles(String uid) {
+        if (profileImageUri != null) {
+            StorageReference imgRef = storageRef.child("profileImages/" + uid + ".jpg");
+            imgRef.putFile(profileImageUri);
+        }
+        if (resumeUri != null) {
+            StorageReference resumeRef = storageRef.child("resumes/" + uid + ".pdf");
+            resumeRef.putFile(resumeUri);
+        }
+        Toast.makeText(getContext(), "Profile saved successfully", Toast.LENGTH_SHORT).show();
+        requireActivity().getSupportFragmentManager().beginTransaction().remove(ProfileFragment.this).commit();
     }
 }
