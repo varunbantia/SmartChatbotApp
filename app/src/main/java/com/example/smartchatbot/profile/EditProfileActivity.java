@@ -1,13 +1,21 @@
 package com.example.smartchatbot.profile;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.widget.*;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.bumptech.glide.Glide;
 import com.example.smartchatbot.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -15,160 +23,255 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+
 import java.util.HashMap;
 import java.util.Map;
 
 public class EditProfileActivity extends AppCompatActivity {
 
-    private EditText etName, etEmail, etPhone, etDob, etSkills, etQualification, etLanguages,
-            etExperience, etJobRole, etLocation;
-    private Button btnSave, btnUploadImage, btnUploadResume;
+    // Views
     private ImageView ivProfileImage;
-    private TextView tvResumeName;
+    private TextView tvName, tvEmail, tvPhone, tvDob, tvResumeName, btnUploadImage;
+    private EditText etSkills, etQualification, etLanguages, etExperience, etJobRole, etLocation;
+    private Button btnSave, btnUploadResume;
+    private ProgressBar progressBar;
 
+    // Firebase
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
-    private StorageReference storageRef;
+    private FirebaseStorage storage;
 
-    private Uri imageUri = null;
-    private Uri resumeUri = null;
+    // URIs for new file selections
+    private Uri newImageUri = null;
+    private Uri newResumeUri = null;
 
-    private static final int PICK_IMAGE = 101;
-    private static final int PICK_RESUME = 102;
+    // Modern ActivityResultLaunchers
+    private ActivityResultLauncher<Intent> imagePickerLauncher;
+    private ActivityResultLauncher<Intent> resumePickerLauncher;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
 
-        // Init views
+        initializeViews();
+        initializeFirebase();
+        initializeLaunchers();
+        setupClickListeners();
+
+        loadUserProfile();
+    }
+
+    private void initializeViews() {
         ivProfileImage = findViewById(R.id.ivProfileImage);
         btnUploadImage = findViewById(R.id.btnUploadImage);
         btnUploadResume = findViewById(R.id.btnUploadResume);
         tvResumeName = findViewById(R.id.tvResumeName);
-        etName = findViewById(R.id.etName);
-        etEmail = findViewById(R.id.etEmail);
-        etPhone = findViewById(R.id.etPhone);
-        etDob = findViewById(R.id.etDob);
+        progressBar = findViewById(R.id.progressBar);
+
+        // Non-editable TextViews (Corrected from EditText)
+        tvName = findViewById(R.id.tvName);
+        tvEmail = findViewById(R.id.tvEmail);
+        tvPhone = findViewById(R.id.tvPhone);
+        tvDob = findViewById(R.id.tvDob);
+
+        // Editable EditTexts
         etSkills = findViewById(R.id.etSkills);
         etQualification = findViewById(R.id.etQualification);
         etLanguages = findViewById(R.id.etLanguages);
         etExperience = findViewById(R.id.etExperience);
         etJobRole = findViewById(R.id.etJobRole);
         etLocation = findViewById(R.id.etLocation);
-        btnSave = findViewById(R.id.btnSave);
 
-        // Firebase init
+        btnSave = findViewById(R.id.btnSave);
+    }
+
+    private void initializeFirebase() {
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
-        storageRef = FirebaseStorage.getInstance().getReference();
+        storage = FirebaseStorage.getInstance();
+    }
 
-        loadUserProfile();
+    private void initializeLaunchers() {
+        imagePickerLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+                        newImageUri = result.getData().getData();
+                        Glide.with(this).load(newImageUri).into(ivProfileImage);
+                    }
+                });
 
-        btnUploadImage.setOnClickListener(v -> pickImage());
-        btnUploadResume.setOnClickListener(v -> pickResume());
+        resumePickerLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+                        newResumeUri = result.getData().getData();
+                        tvResumeName.setText(newResumeUri.getLastPathSegment());
+                    }
+                });
+    }
+
+    private void setupClickListeners() {
+        View.OnClickListener pickImageListener = v -> {
+            Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+            intent.setType("image/*");
+            imagePickerLauncher.launch(intent);
+        };
+        btnUploadImage.setOnClickListener(pickImageListener);
+        ivProfileImage.setOnClickListener(pickImageListener); // Make image itself clickable
+
+        btnUploadResume.setOnClickListener(v -> {
+            Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+            intent.setType("application/pdf");
+            resumePickerLauncher.launch(intent);
+        });
+
         btnSave.setOnClickListener(v -> saveProfile());
     }
 
-    private void pickImage() {
-        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-        intent.setType("image/*");
-        startActivityForResult(intent, PICK_IMAGE);
-    }
-
-    private void pickResume() {
-        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-        intent.setType("application/pdf");
-        startActivityForResult(intent, PICK_RESUME);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == Activity.RESULT_OK && data != null) {
-            if (requestCode == PICK_IMAGE) {
-                imageUri = data.getData();
-                ivProfileImage.setImageURI(imageUri);
-            } else if (requestCode == PICK_RESUME) {
-                resumeUri = data.getData();
-                tvResumeName.setText("Resume: " + resumeUri.getLastPathSegment());
-            }
-        }
-    }
-
     private void loadUserProfile() {
+        progressBar.setVisibility(View.VISIBLE);
         String uid = mAuth.getCurrentUser() != null ? mAuth.getCurrentUser().getUid() : null;
-        if (uid == null) return;
+        if (uid == null) {
+            Toast.makeText(this, "User not found. Please log in again.", Toast.LENGTH_LONG).show();
+            progressBar.setVisibility(View.GONE);
+            finish(); // Close activity if user is not logged in
+            return;
+        }
 
         DocumentReference docRef = db.collection("users").document(uid);
         docRef.get().addOnSuccessListener(snapshot -> {
             if (snapshot.exists()) {
-                etName.setText(snapshot.getString("name"));
-                etEmail.setText(snapshot.getString("email"));
-                etPhone.setText(snapshot.getString("phone"));
-                etDob.setText(snapshot.getString("dob"));
+                // Load non-editable fields
+                tvName.setText("Name: " + snapshot.getString("name"));
+                tvEmail.setText("Email: " + snapshot.getString("email"));
+                tvPhone.setText("Phone: " + snapshot.getString("phone"));
+                tvDob.setText("DOB: " + snapshot.getString("dob"));
+
+                // Load editable fields
                 etSkills.setText(snapshot.getString("skills"));
                 etQualification.setText(snapshot.getString("qualification"));
                 etLanguages.setText(snapshot.getString("languages"));
                 etExperience.setText(snapshot.getString("experience"));
-                etJobRole.setText(snapshot.getString("jobRole"));
-                etLocation.setText(snapshot.getString("location"));
+                etJobRole.setText(snapshot.getString("preferredJobRole"));
+                etLocation.setText(snapshot.getString("preferredLocation"));
 
-                String imageUrl = snapshot.getString("profileImageUrl");
+                // Load profile image and resume info
+                String imageUrl = snapshot.getString("profilePictureUrl");
+                if (imageUrl != null && !imageUrl.isEmpty()) {
+                    Glide.with(this).load(imageUrl).placeholder(R.drawable.ic_user).into(ivProfileImage);
+                }
+
                 String resumeUrl = snapshot.getString("resumeUrl");
-
-                if (imageUrl != null) Glide.with(this).load(imageUrl).into(ivProfileImage);
-                if (resumeUrl != null) tvResumeName.setText("Resume uploaded");
+                if (resumeUrl != null && !resumeUrl.isEmpty()) {
+                    tvResumeName.setText("Current resume is on file");
+                } else {
+                    tvResumeName.setText("No resume uploaded");
+                }
+            } else {
+                Toast.makeText(this, "Profile not found. Please complete it first.", Toast.LENGTH_LONG).show();
             }
+            progressBar.setVisibility(View.GONE);
+        }).addOnFailureListener(e -> {
+            Toast.makeText(this, "Failed to load profile: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            progressBar.setVisibility(View.GONE);
         });
     }
 
+
+    /**
+     * This is the master save function that starts the sequential process.
+     */
     private void saveProfile() {
-        String uid = mAuth.getCurrentUser() != null ? mAuth.getCurrentUser().getUid() : null;
-        if (uid == null) return;
+        progressBar.setVisibility(View.VISIBLE);
+        btnSave.setEnabled(false);
 
-        Map<String, Object> profile = new HashMap<>();
-        profile.put("name", etName.getText().toString().trim());
-        profile.put("email", etEmail.getText().toString().trim());
-        profile.put("phone", etPhone.getText().toString().trim());
-        profile.put("dob", etDob.getText().toString().trim());
-        profile.put("skills", etSkills.getText().toString().trim());
-        profile.put("qualification", etQualification.getText().toString().trim());
-        profile.put("languages", etLanguages.getText().toString().trim());
-        profile.put("experience", etExperience.getText().toString().trim());
-        profile.put("jobRole", etJobRole.getText().toString().trim());
-        profile.put("location", etLocation.getText().toString().trim());
+        String uid = mAuth.getCurrentUser().getUid();
 
-        // Save profile image
-        if (imageUri != null) {
-            StorageReference imgRef = storageRef.child("users/" + uid + "/profile.jpg");
-            imgRef.putFile(imageUri).addOnSuccessListener(task ->
-                    imgRef.getDownloadUrl().addOnSuccessListener(uri -> {
-                        profile.put("profileImageUrl", uri.toString());
-                        updateFirestore(uid, profile);
-                    })
-            );
-        }
+        // Get all text field data into a map
+        Map<String, Object> profileUpdates = new HashMap<>();
+        profileUpdates.put("skills", etSkills.getText().toString().trim());
+        profileUpdates.put("qualification", etQualification.getText().toString().trim());
+        profileUpdates.put("languages", etLanguages.getText().toString().trim());
+        profileUpdates.put("experience", etExperience.getText().toString().trim());
+        profileUpdates.put("preferredJobRole", etJobRole.getText().toString().trim());
+        profileUpdates.put("preferredLocation", etLocation.getText().toString().trim());
 
-        // Save resume
-        if (resumeUri != null) {
-            StorageReference resumeRef = storageRef.child("users/" + uid + "/resume.pdf");
-            resumeRef.putFile(resumeUri).addOnSuccessListener(task ->
-                    resumeRef.getDownloadUrl().addOnSuccessListener(uri -> {
-                        profile.put("resumeUrl", uri.toString());
-                        updateFirestore(uid, profile);
-                    })
-            );
-        }
-
-        // Always update details
-        updateFirestore(uid, profile);
+        // Start the upload chain, beginning with the profile image.
+        // The final update to Firestore will happen at the end of the chain.
+        uploadProfileImage(uid, profileUpdates);
     }
 
+    /**
+     * Step 1: Uploads the profile image if a new one was selected.
+     * On success, it proceeds to the resume upload step.
+     */
+    private void uploadProfileImage(String uid, Map<String, Object> profileUpdates) {
+        if (newImageUri != null) {
+            StorageReference imgRef = storage.getReference().child("profile_pictures/" + uid);
+            imgRef.putFile(newImageUri)
+                    .addOnSuccessListener(task -> imgRef.getDownloadUrl()
+                            .addOnSuccessListener(uri -> {
+                                profileUpdates.put("profilePictureUrl", uri.toString());
+                                // Image done, now upload resume
+                                uploadResume(uid, profileUpdates);
+                            }))
+                    .addOnFailureListener(e -> {
+                        Toast.makeText(this, "Image upload failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        resetButtonState();
+                    });
+        } else {
+            // No new image, proceed directly to resume upload
+            uploadResume(uid, profileUpdates);
+        }
+    }
+
+    /**
+     * Step 2: Uploads the resume if a new one was selected.
+     * On success, it proceeds to the final Firestore update step.
+     */
+    private void uploadResume(String uid, Map<String, Object> profileUpdates) {
+        if (newResumeUri != null) {
+            StorageReference resumeRef = storage.getReference().child("resumes/" + uid);
+            resumeRef.putFile(newResumeUri)
+                    .addOnSuccessListener(task -> resumeRef.getDownloadUrl()
+                            .addOnSuccessListener(uri -> {
+                                profileUpdates.put("resumeUrl", uri.toString());
+                                // Resume done, now update Firestore
+                                updateFirestore(uid, profileUpdates);
+                            }))
+                    .addOnFailureListener(e -> {
+                        Toast.makeText(this, "Resume upload failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        resetButtonState();
+                    });
+        } else {
+            // No new resume, proceed to update Firestore with whatever data we have
+            updateFirestore(uid, profileUpdates);
+        }
+    }
+
+    /**
+     * Step 3: The final step. Updates Firestore with all collected text and URL data.
+     */
     private void updateFirestore(String uid, Map<String, Object> profile) {
+        // We also need to mark the profile as complete if it wasn't already.
+        profile.put("isProfileComplete", true);
+
         db.collection("users").document(uid)
-                .set(profile)
-                .addOnSuccessListener(aVoid -> Toast.makeText(this, "Profile updated", Toast.LENGTH_SHORT).show())
-                .addOnFailureListener(e -> Toast.makeText(this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+                .update(profile)
+                .addOnSuccessListener(aVoid -> {
+                    Toast.makeText(this, "Profile updated successfully!", Toast.LENGTH_SHORT).show();
+                    finish(); // Close the activity after saving
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(this, "Error updating profile: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    resetButtonState();
+                });
+    }
+
+    private void resetButtonState() {
+        progressBar.setVisibility(View.GONE);
+        btnSave.setEnabled(true);
     }
 }

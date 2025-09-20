@@ -148,24 +148,75 @@ public class ProfileFragment extends Fragment {
 
     // Step validations
     private boolean validateStep1() {
+        // Name validation
         if (TextUtils.isEmpty(etName.getText())) {
             etName.setError("Enter name");
             return false;
         }
-        if (TextUtils.isEmpty(etEmail.getText())) {
+
+        // Email validation
+        String email = etEmail.getText().toString().trim();
+        if (TextUtils.isEmpty(email)) {
             etEmail.setError("Enter email");
             return false;
         }
-        if (TextUtils.isEmpty(etPhone.getText())) {
+        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            etEmail.setError("Enter a valid email");
+            return false;
+        }
+
+        // Phone validation (must be 10 digits)
+        String phone = etPhone.getText().toString().trim();
+        if (TextUtils.isEmpty(phone)) {
             etPhone.setError("Enter phone");
             return false;
         }
-        if (TextUtils.isEmpty(etDob.getText())) {
+        if (!phone.matches("^[0-9]{10}$")) {
+            etPhone.setError("Enter valid 10-digit phone number");
+            return false;
+        }
+
+        // DOB validation (dd/MM/yyyy format + age check)
+        String dob = etDob.getText().toString().trim();
+        if (TextUtils.isEmpty(dob)) {
             etDob.setError("Enter DOB");
             return false;
         }
+        if (!dob.matches("^\\d{1,2}/\\d{1,2}/\\d{4}$")) {
+            etDob.setError("Enter DOB in dd/MM/yyyy format (dd/MM/yyyy)");
+            return false;
+        }
+
+        // Parse DOB and check age
+        try {
+            String[] parts = dob.split("/");
+            int day = Integer.parseInt(parts[0]);
+            int month = Integer.parseInt(parts[1]) - 1; // Month is 0-based in Calendar
+            int year = Integer.parseInt(parts[2]);
+
+            Calendar dobCalendar = Calendar.getInstance();
+            dobCalendar.set(year, month, day);
+
+            Calendar today = Calendar.getInstance();
+            int age = today.get(Calendar.YEAR) - dobCalendar.get(Calendar.YEAR);
+
+            if (today.get(Calendar.DAY_OF_YEAR) < dobCalendar.get(Calendar.DAY_OF_YEAR)) {
+                age--; // Adjust if birthday not reached this year
+            }
+
+            if (age < 18) {
+                etDob.setError("You must be at least 18 years old");
+                return false;
+            }
+
+        } catch (Exception e) {
+            etDob.setError("Invalid DOB format");
+            return false;
+        }
+
         return true;
     }
+
 
     private boolean validateStep2() {
         if (TextUtils.isEmpty(etEducation.getText())) {

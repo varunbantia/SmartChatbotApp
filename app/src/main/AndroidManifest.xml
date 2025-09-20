@@ -12,38 +12,24 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SmartChatBot">
 
-        <activity
-            android:name=".dashboard.MainActivity"
-            android:exported="false" />
-        <activity
-            android:name=".settings.SettingsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".profile.EditProfileActivity"
-            android:exported="false" />
-        <activity
-            android:name=".auth.ForgotPasswordActivity"
-            android:exported="false" />
-        <activity
-            android:name=".auth.SignupActivity"
-            android:exported="false" />
-        <activity
-            android:name=".auth.LoginActivity"
-            android:exported="false" />
-
-        <!-- HomeActivity as Launcher -->
+        <!-- Launcher Activity: Opens Chatbot directly -->
         <activity
             android:name=".dashboard.ChatbotActivity"
             android:exported="true"
-            android:theme="@style/Theme.SmartChatBot"
             android:windowSoftInputMode="adjustResize|stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-    </application>
+        <!-- Other Activities inherit the same theme -->
+        <activity android:name=".dashboard.MainActivity" android:exported="false" />
+        <activity android:name=".settings.SettingsActivity" android:exported="false" />
+        <activity android:name=".profile.EditProfileActivity" android:exported="false" />
+        <activity android:name=".auth.ForgotPasswordActivity" android:exported="false" />
+        <activity android:name=".auth.SignupActivity" android:exported="false" />
+        <activity android:name=".auth.LoginActivity" android:exported="false" />
 
+    </application>
 </manifest>

@@ -51,5 +51,7 @@ dependencies {
     implementation("com.airbnb.android:lottie:6.4.0")
     implementation ("com.github.bumptech.glide:glide:4.16.0")
     annotationProcessor("com.github.bumptech.glide:compiler:4.16.0")
+    implementation("de.hdodenhof:circleimageview:3.1.0")
+    implementation("com.google.firebase:firebase-appcheck-debug:16.0.1")
 
 }
