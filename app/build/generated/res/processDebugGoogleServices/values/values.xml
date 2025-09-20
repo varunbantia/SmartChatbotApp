@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id" translatable="false">518756672764-a385d7g9ausbga5chvagmlqvvpnr3j7b.apps.googleusercontent.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">518756672764</string>
+    <string name="google_api_key" translatable="false">AIzaSyCfjk4xoC8ukiWC25VSl55gXY2ghge5MGE</string>
+    <string name="google_app_id" translatable="false">1:518756672764:android:14b1d5bbeb23b1b51f2379</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyCfjk4xoC8ukiWC25VSl55gXY2ghge5MGE</string>
+    <string name="google_storage_bucket" translatable="false">smartchatbot-24e6b.firebasestorage.app</string>
+    <string name="project_id" translatable="false">smartchatbot-24e6b</string>
+</resources>

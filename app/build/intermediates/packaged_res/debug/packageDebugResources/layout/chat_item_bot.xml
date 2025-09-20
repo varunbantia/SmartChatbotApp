@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:gravity="start"
+    android:orientation="horizontal"
+    android:padding="6dp">
+
+    <ImageView
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:src="@drawable/ic_bot"
+        android:layout_marginEnd="6dp"
+        android:contentDescription="Bot Avatar" />
+
+    <TextView
+        android:id="@+id/tvBotMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_bot_message"
+        android:text="Bot message"
+        android:textColor="@color/black"
+        android:padding="12dp"
+        android:textSize="14sp" />
+
+    <ImageButton
+        android:id="@+id/btnSpeak"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/ic_volume"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="Read Message"
+        app:tint="@color/purple_500"
+        android:layout_marginStart="6dp"/>
+</LinearLayout>

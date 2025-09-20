@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/menu_jobs"
+        android:title="Jobs"
+        android:icon="@drawable/ic_jobs"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/menu_skills"
+        android:title="Skills"
+        android:icon="@drawable/ic_skills"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/menu_counseling"
+        android:title="Counseling"
+        android:icon="@drawable/ic_counseling"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/menu_profile"
+        android:title="Edit Profile"
+        android:icon="@drawable/ic_user"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/menu_settings"
+        android:title="Settings"
+        android:icon="@drawable/ic_settings"
+        app:showAsAction="never"/>
+
+</menu>

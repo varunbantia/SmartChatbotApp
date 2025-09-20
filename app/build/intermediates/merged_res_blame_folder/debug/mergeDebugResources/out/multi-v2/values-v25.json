@@ -1,0 +1,20 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.example.smartchatbot.app-mergeDebugResources-47:/values-v25/values-v25.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\vbant\\.gradle\\caches\\8.13\\transforms\\b9cd3491d489ade1e0dc34728f150fff\\transformed\\appcompat-1.7.1\\res\\values-v25\\values-v25.xml",
+                    "from": {
+                        "startLines": "2,3,4,6",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "55,126,209,308",
+                        "endLines": "2,3,5,7",
+                        "endColumns": "70,82,12,12",
+                        "endOffsets": "121,204,303,414"
+                    }
+                }
+            ]
+        }
+    ]
+}

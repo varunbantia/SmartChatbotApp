@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+
+    <!-- Sun/Moon icon for theme toggle -->
+    <path
+        android:fillColor="#FFBB33"
+        android:pathData="M12,4a1,1 0,0 1,1 1v2a1,1 0,0 1,-2 0V5a1,1 0,0 1,1 -1zM12,17a5,5 0,1 0 0,-10 5,5 0,0 0 0,10zm6.364,-1.636l1.414,1.414a1,1 0,0 1,-1.414 1.414l-1.414,-1.414a1,1 0,0 1,1.414 -1.414zM4.222,4.222l1.414,1.414a1,1 0,0 1,-1.414 1.414L2.808,5.636a1,1 0,0 1,1.414 -1.414zM19,12a1,1 0,0 1,1 1h2a1,1 0,0 1,0 2h-2a1,1 0,0 1,-1 -1 1,1 0,0 1,1 -1zm-14,0a1,1 0,0 1,1 1H5a1,1 0,0 1,0 2h-2a1,1 0,0 1,-1 -1 1,1 0,0 1,1 -1zM17.364,6.636a1,1 0,0 1,1.414 0l1.414,1.414a1,1 0,0 1,-1.414 1.414l-1.414,-1.414a1,1 0,0 1,0 -1.414zM6.636,17.364a1,1 0,0 1,1.414 0l1.414,1.414a1,1 0,0 1,-1.414 1.414L6.636,18.778a1,1 0,0 1,0 -1.414z" />
+</vector>
