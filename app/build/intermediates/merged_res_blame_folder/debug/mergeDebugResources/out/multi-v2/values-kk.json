@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.smartchatbot.app-mergeDebugResources-47:/values-kk/values-kk.xml",
+            "outputFile": "com.example.smartchatbot.app-mergeDebugResources-48:/values-kk/values-kk.xml",
             "map": [
                 {
                     "source": "C:\\Users\\vbant\\.gradle\\caches\\8.13\\transforms\\96c0132b4d11abb73c448a8e9cd522b1\\transformed\\play-services-base-18.5.0\\res\\values-kk\\values.xml",

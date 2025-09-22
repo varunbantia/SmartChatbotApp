@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.smartchatbot.app-mergeDebugResources-47:/values-zh-rCN/values-zh-rCN.xml",
+            "outputFile": "com.example.smartchatbot.app-mergeDebugResources-48:/values-zh-rCN/values-zh-rCN.xml",
             "map": [
                 {
                     "source": "C:\\Users\\vbant\\.gradle\\caches\\8.13\\transforms\\8614c13ce434cae0387e9f80a8bd2817\\transformed\\credentials-1.2.0-rc01\\res\\values-zh-rCN\\values-zh-rCN.xml",

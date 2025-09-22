@@ -37,4 +37,9 @@
         <item>₹6-10 Lakhs</item>
         <item>Above ₹10 Lakhs</item>
     </string-array>
+    <string-array name="languages_array">
+        <item>English</item>
+        <item>हिंदी</item>
+        <item>ਪੰਜਾਬੀ</item>
+    </string-array>
 </resources>

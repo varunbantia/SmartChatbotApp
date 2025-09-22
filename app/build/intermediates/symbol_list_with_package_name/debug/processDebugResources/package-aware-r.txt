@@ -43,6 +43,7 @@ anim m3_side_sheet_exit_to_right
 anim mtrl_bottom_sheet_slide_in
 anim mtrl_bottom_sheet_slide_out
 anim mtrl_card_lowers_interpolator
+anim pulsing_red_dot
 animator design_appbar_state_list_animator
 animator design_fab_hide_motion_spec
 animator design_fab_show_motion_spec
@@ -78,6 +79,7 @@ animator mtrl_fab_show_motion_spec
 animator mtrl_fab_transformation_sheet_collapse_spec
 animator mtrl_fab_transformation_sheet_expand_spec
 array education_levels
+array languages_array
 array punjab_districts
 array salary_ranges
 array work_experience
@@ -3121,6 +3123,7 @@ drawable ic_jobs
 drawable ic_keyboard_black_24dp
 drawable ic_launcher_background
 drawable ic_launcher_foreground
+drawable ic_lock
 drawable ic_logo
 drawable ic_logout
 drawable ic_m3_chip_check
@@ -3135,10 +3138,14 @@ drawable ic_mtrl_chip_close_circle
 drawable ic_other_sign_in
 drawable ic_passkey
 drawable ic_password
+drawable ic_pause
+drawable ic_play_arrow
+drawable ic_recording_dot
 drawable ic_search_black_24
 drawable ic_send
 drawable ic_settings
 drawable ic_skills
+drawable ic_stop1
 drawable ic_theme
 drawable ic_user
 drawable ic_volume
@@ -3164,6 +3171,7 @@ drawable material_ic_keyboard_arrow_previous_black_24dp
 drawable material_ic_keyboard_arrow_right_black_24dp
 drawable material_ic_menu_arrow_down_black_24dp
 drawable material_ic_menu_arrow_up_black_24dp
+drawable mic_button_background
 drawable mtrl_bottomsheet_drag_handle
 drawable mtrl_checkbox_button
 drawable mtrl_checkbox_button_checked_unchecked
@@ -3222,6 +3230,7 @@ drawable slide_bg
 drawable test_level_drawable
 drawable tooltip_frame_dark
 drawable tooltip_frame_light
+drawable user_bubble_background
 drawable white_card_bg
 id ALT
 id BOTTOM_END
@@ -3336,6 +3345,7 @@ id browser_actions_menu_items
 id browser_actions_menu_view
 id btnCloseProfile
 id btnDeleteAccount
+id btnDeleteVoice
 id btnGoogleLogin
 id btnGoogleSignUp
 id btnLogOut
@@ -3345,11 +3355,15 @@ id btnMic
 id btnNext1
 id btnNext2
 id btnNext3
+id btnPlayPause
+id btnPlayPauseBubble
 id btnResetPassword
 id btnSave
 id btnSend
+id btnSendVoice
 id btnSignUp
 id btnSpeak
+id btnStopRecording
 id btnSubmit
 id btnTheme
 id btnUploadImage
@@ -3512,13 +3526,15 @@ id immediateStop
 id included
 id indeterminate
 id info
-id inputBar
+id inputArea
 id invisible
 id inward
 id italic
 id item_touch_helper_previous_elevation
+id ivLock
 id ivProfile
 id ivProfileImage
+id ivRecordingDot
 id jumpToEnd
 id jumpToStart
 id labeled
@@ -3666,6 +3682,7 @@ id report_drawn
 id restart
 id reverse
 id reverseSawtooth
+id reviewVoiceLayout
 id right
 id rightToLeft
 id right_icon
@@ -3692,6 +3709,7 @@ id search_mag_icon
 id search_plate
 id search_src_text
 id search_voice_btn
+id seekBarBubble
 id select_dialog_listview
 id selected
 id selection_type
@@ -3758,6 +3776,7 @@ id tag_window_insets_animation_callback
 id text
 id text2
 id textEnd
+id textInputLayout
 id textSpacerNoButtons
 id textSpacerNoTitle
 id textStart
@@ -3795,14 +3814,18 @@ id tvBackToLogin
 id tvBotMessage
 id tvCurrentTheme
 id tvDob
+id tvDurationBubble
 id tvEmail
 id tvForgotPassword
 id tvName
 id tvPhone
+id tvRecordingTime
 id tvResume
 id tvResumeName
 id tvSignupLink
+id tvSlideToCancel
 id tvUserMessage
+id tvVoiceDuration
 id tvWelcome
 id unchecked
 id uniform
@@ -3820,6 +3843,8 @@ id view_tree_saved_state_registry_owner
 id view_tree_view_model_store_owner
 id visible
 id visible_removing_fragment_view_tag
+id voiceRecordingLayout
+id voiceSeekBar
 id welcomeCard
 id welcomeSection
 id welcomeSubtitle
@@ -3982,6 +4007,8 @@ layout fragment_profile
 layout fragment_skills
 layout ime_base_split_test_activity
 layout ime_secondary_split_test_activity
+layout item_chat_user_text
+layout item_chat_user_voice
 layout m3_alert_dialog
 layout m3_alert_dialog_actions
 layout m3_alert_dialog_title
@@ -4049,6 +4076,7 @@ mipmap ic_launcher_foreground
 mipmap ic_launcher_round
 plurals mtrl_badge_content_description
 raw firebase_common_keep
+raw translate_models_metadata
 string abc_action_bar_home_description
 string abc_action_bar_up_description
 string abc_action_menu_overflow_description
@@ -5540,3 +5568,4 @@ styleable include constraintSet
 xml backup_rules
 xml data_extraction_rules
 xml image_share_filepaths
+xml rapid_response_client_defaults
