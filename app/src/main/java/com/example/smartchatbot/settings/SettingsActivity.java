@@ -19,6 +19,7 @@ import androidx.appcompat.widget.Toolbar;
 import com.example.smartchatbot.R;
 // Make sure to import your LoginActivity
 // import com.example.smartchatbot.auth.LoginActivity;
+import com.example.smartchatbot.auth.LoginActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -71,9 +72,9 @@ public class SettingsActivity extends AppCompatActivity {
                 .setPositiveButton("Yes", (dialog, which) -> {
                     mAuth.signOut();
                     Toast.makeText(this, "Logged out successfully", Toast.LENGTH_SHORT).show();
-                    // Intent intent = new Intent(SettingsActivity.this, LoginActivity.class);
-                    // intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    // startActivity(intent);
+                    Intent intent = new Intent(SettingsActivity.this, LoginActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                     startActivity(intent);
                     finish();
                 })
                 .setNegativeButton("No", null)

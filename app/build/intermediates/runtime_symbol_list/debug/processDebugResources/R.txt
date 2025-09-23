@@ -3530,6 +3530,7 @@ int id invisible 0x7f090127
 int id inward 0x7f090128
 int id italic 0x7f090129
 int id item_touch_helper_previous_elevation 0x7f09012a
+int id ivBotIcon 0x7f090273
 int id ivLock 0x7f09012b
 int id ivProfile 0x7f09012c
 int id ivProfileImage 0x7f09012d
@@ -3578,6 +3579,7 @@ int id material_timepicker_ok_button 0x7f090157
 int id material_timepicker_view 0x7f090158
 int id material_value_index 0x7f090159
 int id matrix 0x7f09015a
+int id menu_auto_speak 0x7f090275
 int id menu_counseling 0x7f09015b
 int id menu_jobs 0x7f09015c
 int id menu_profile 0x7f09015d

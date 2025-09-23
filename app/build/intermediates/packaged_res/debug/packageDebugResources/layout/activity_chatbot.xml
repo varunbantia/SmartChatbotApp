@@ -130,9 +130,7 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:padding="8dp"
-                android:background="@android:color/white"
                 android:visibility="gone">
-
                 <ImageButton
                     android:id="@+id/btnStopRecording"
                     android:layout_width="48dp"
@@ -141,14 +139,12 @@
                     android:src="@drawable/ic_pause"
                     android:visibility="gone"
                     app:tint="@android:color/white" />
-
                 <ImageView
                     android:id="@+id/ivRecordingDot"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
                     android:src="@drawable/ic_recording_dot"
                     android:layout_marginStart="12dp" />
-
                 <TextView
                     android:id="@+id/tvRecordingTime"
                     android:layout_width="wrap_content"
@@ -156,10 +152,9 @@
                     android:layout_marginStart="8dp"
                     android:text="0:00"
                     android:textColor="#D32F2F"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:textStyle="bold"
-                    android:minWidth="60dp"/>
-
+                    android:minWidth="50dp"/>
                 <TextView
                     android:id="@+id/tvSlideToCancel"
                     android:layout_width="0dp"
@@ -167,10 +162,9 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="&lt; Slide to cancel"
-                    android:textColor="#757575"
-                    android:textSize="16sp"/>
-
+                    android:textColor="#757575" />
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/reviewVoiceLayout"
                 android:layout_width="match_parent"

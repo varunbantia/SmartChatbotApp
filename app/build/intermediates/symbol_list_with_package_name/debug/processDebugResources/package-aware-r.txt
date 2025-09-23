@@ -3531,6 +3531,7 @@ id invisible
 id inward
 id italic
 id item_touch_helper_previous_elevation
+id ivBotIcon
 id ivLock
 id ivProfile
 id ivProfileImage
@@ -3579,6 +3580,7 @@ id material_timepicker_ok_button
 id material_timepicker_view
 id material_value_index
 id matrix
+id menu_auto_speak
 id menu_counseling
 id menu_jobs
 id menu_profile

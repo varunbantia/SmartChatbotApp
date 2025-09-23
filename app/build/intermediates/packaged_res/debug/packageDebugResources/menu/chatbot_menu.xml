@@ -31,5 +31,8 @@
         android:title="Settings"
         android:icon="@drawable/ic_settings"
         app:showAsAction="never"/>
-
+    <item
+        android:id="@+id/menu_auto_speak"
+        android:title="Auto-Speak New Messages"
+        android:checkable="true" />
 </menu>

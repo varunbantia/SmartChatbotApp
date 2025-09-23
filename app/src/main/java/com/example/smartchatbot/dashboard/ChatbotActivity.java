@@ -3,27 +3,28 @@ package com.example.smartchatbot.dashboard;
 // Import necessary classes
 import android.Manifest;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.os.Handler;
 import android.speech.tts.TextToSpeech;
+import android.speech.tts.UtteranceProgressListener;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
-import android.widget.Spinner;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.PopupMenu;
@@ -66,6 +67,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+
 public class ChatbotActivity extends AppCompatActivity implements ChatAdapter.OnPlayButtonClickListener {
 
     // --- Views ---
@@ -79,7 +81,6 @@ public class ChatbotActivity extends AppCompatActivity implements ChatAdapter.On
     private ImageButton btnDeleteVoice, btnPlayPause, btnSendVoice, btnStopRecording;
     private ImageView ivRecordingDot;
     private SeekBar voiceSeekBar;
-    private Spinner languageSpinner;
 
     // --- Data & Logic ---
     private List<ChatMessage> chatMessages;
@@ -87,7 +88,8 @@ public class ChatbotActivity extends AppCompatActivity implements ChatAdapter.On
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
     private ChatbotApi api;
-    private Handler timerHandler = new Handler();
+    private final Handler timerHandler = new Handler();
+    private String selectedLanguageCode = "en-IN";
 
     // --- Audio Recording & Playback ---
     private MediaRecorder recorder;
@@ -96,23 +98,28 @@ public class ChatbotActivity extends AppCompatActivity implements ChatAdapter.On
     private boolean isRecording = false;
     private boolean isLocked = false;
     private long startTime = 0;
-    private String selectedLanguageCode = "en-IN";
 
-    // --- Playback Tracking for RecyclerView ---
+    // --- Playback Tracking ---
     private MediaPlayer chatPlayer;
     private ImageButton currentlyPlayingButton = null;
     private SeekBar currentlyPlayingSeekBar = null;
     private String currentlyPlayingFilePath = null;
+    private final Handler chatSeekBarHandler = new Handler();
 
-    // --- Constants ---
+    // --- State Management for TTS and Preferences ---
+    private SharedPreferences prefs;
+    private boolean isAutoSpeakEnabled = true;
+    private String currentlySpeakingText = null;
+
     private static final int PERMISSION_REQUEST_CODE = 200;
-    private static final float CANCEL_THRESHOLD_DP = 100;
-    private static final float LOCK_THRESHOLD_DP = 100;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chatbot);
+
+        prefs = getSharedPreferences("ChatbotPrefs", MODE_PRIVATE);
+        loadAutoSpeakPreference();
 
         initializeViews();
         setupRecyclerView();
@@ -121,8 +128,131 @@ public class ChatbotActivity extends AppCompatActivity implements ChatAdapter.On
         setupRetrofit();
         setupInputListeners();
         setupMenuListener();
-        // setupLanguageSpinner(); // Uncomment this if you add the Spinner to your XML
     }
+
+    private void loadAutoSpeakPreference() {
+        isAutoSpeakEnabled = prefs.getBoolean("auto_speak_enabled", true);
+    }
+
+    private void saveAutoSpeakPreference(boolean isEnabled) {
+        isAutoSpeakEnabled = isEnabled;
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putBoolean("auto_speak_enabled", isEnabled);
+        editor.apply();
+    }
+
+    private void setupTts() {
+        tts = new TextToSpeech(this, status -> {
+            if (status == TextToSpeech.SUCCESS) {
+                tts.setLanguage(new Locale("en", "IN"));
+
+                tts.setOnUtteranceProgressListener(new UtteranceProgressListener() {
+                    @Override
+                    public void onStart(String utteranceId) {
+                        runOnUiThread(() -> currentlySpeakingText = utteranceId);
+                    }
+                    @Override
+                    public void onDone(String utteranceId) {
+                        runOnUiThread(() -> currentlySpeakingText = null);
+                    }
+                    @Override
+                    public void onError(String utteranceId) {
+                        runOnUiThread(() -> currentlySpeakingText = null);
+                    }
+                });
+            }
+        });
+    }
+
+    // In ChatbotActivity.java
+
+    @Override
+    public void onSpeakerIconClick(String textToSpeak) {
+        // 1. First, check if the user is tapping the icon of the message that is currently speaking.
+        final boolean isStoppingThisMessage = textToSpeak.equals(currentlySpeakingText);
+
+        // 2. Always stop any and all current speech.
+        tts.stop();
+
+        // 3. Now, decide what to do.
+        if (isStoppingThisMessage) {
+            // If the user's goal was to stop this message, we manually clear our
+            // tracking variable right now to avoid the race condition.
+            currentlySpeakingText = null;
+        } else {
+            // If the user tapped a different message or nothing was playing,
+            // their goal is to start playback.
+            speakText(textToSpeak);
+        }
+    }
+
+    public void speakText(String text) {
+        if (tts != null && text != null && !text.isEmpty()) {
+            tts.speak(text, TextToSpeech.QUEUE_FLUSH, null, text);
+        }
+    }
+
+    private void sendMessageToBot(String userMessage) {
+        Map<String, String> body = new HashMap<>();
+        body.put("message", userMessage);
+        api.sendMessage(body).enqueue(new Callback<Map<String, String>>() {
+            @Override
+            public void onResponse(@NonNull Call<Map<String, String>> call, @NonNull Response<Map<String, String>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    String reply = response.body().get("reply");
+                    addBotMessage(reply);
+                    if (isAutoSpeakEnabled) {
+                        speakText(reply);
+                    }
+                } else {
+                    addBotMessage("⚠️ Failed to get response from server.");
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<Map<String, String>> call, @NonNull Throwable t) {
+                addBotMessage("❌ Error: " + t.getMessage());
+            }
+        });
+    }
+
+    private void setupMenuListener() {
+        btnMenu.setOnClickListener(v -> {
+            PopupMenu popup = new PopupMenu(ChatbotActivity.this, v);
+            popup.getMenuInflater().inflate(R.menu.chatbot_menu, popup.getMenu());
+
+            popup.getMenu().findItem(R.id.menu_auto_speak).setChecked(isAutoSpeakEnabled);
+
+            popup.setOnMenuItemClickListener(item -> {
+                int id = item.getItemId();
+                if (id == R.id.menu_jobs) {
+                    loadFragment(new JobsFragment());
+                    return true;
+                } else if (id == R.id.menu_skills) {
+                    loadFragment(new SkillsFragment());
+                    return true;
+                } else if (id == R.id.menu_counseling) {
+                    loadFragment(new CounselingFragment());
+                    return true;
+                } else if (id == R.id.menu_profile) {
+                    startActivity(new Intent(ChatbotActivity.this, EditProfileActivity.class));
+                    return true;
+                } else if (id == R.id.menu_settings) {
+                    startActivity(new Intent(ChatbotActivity.this, SettingsActivity.class));
+                    return true;
+                } else if (id == R.id.menu_auto_speak) {
+                    boolean newState = !item.isChecked();
+                    item.setChecked(newState);
+                    saveAutoSpeakPreference(newState);
+                    return false;
+                }
+                return false;
+            });
+            popup.show();
+        });
+    }
+
+    // --- [The rest of your code is unchanged and goes here] ---
 
     private void initializeViews() {
         recyclerView = findViewById(R.id.recyclerView);
@@ -143,7 +273,6 @@ public class ChatbotActivity extends AppCompatActivity implements ChatAdapter.On
         btnStopRecording = findViewById(R.id.btnStopRecording);
         voiceSeekBar = findViewById(R.id.voiceSeekBar);
         tvVoiceDuration = findViewById(R.id.tvVoiceDuration);
-        // languageSpinner = findViewById(R.id.languageSpinner);
     }
 
     private void setupRecyclerView() {
@@ -159,14 +288,6 @@ public class ChatbotActivity extends AppCompatActivity implements ChatAdapter.On
         loadUserNameAndCheckProfile();
     }
 
-    private void setupTts() {
-        tts = new TextToSpeech(this, status -> {
-            if (status == TextToSpeech.SUCCESS) {
-                tts.setLanguage(new Locale("en", "IN"));
-            }
-        });
-    }
-
     private void setupRetrofit() {
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
         logging.setLevel(HttpLoggingInterceptor.Level.BODY);
@@ -177,25 +298,6 @@ public class ChatbotActivity extends AppCompatActivity implements ChatAdapter.On
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         api = retrofit.create(ChatbotApi.class);
-    }
-
-    private void setupLanguageSpinner() {
-        // This requires you to add a Spinner with the id 'languageSpinner' to your activity_chatbot.xml
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.languages_array, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        languageSpinner.setAdapter(adapter);
-
-        languageSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (position == 0) selectedLanguageCode = "en-IN";
-                else if (position == 1) selectedLanguageCode = "hi-IN";
-                else if (position == 2) selectedLanguageCode = "pa-IN";
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {}
-        });
     }
 
     private void setupInputListeners() {
@@ -226,19 +328,26 @@ public class ChatbotActivity extends AppCompatActivity implements ChatAdapter.On
         });
 
         btnMic.setOnTouchListener((v, event) -> {
-            float initialX = event.getX(), initialY = event.getY();
-            float cancelThresholdPx = CANCEL_THRESHOLD_DP * getResources().getDisplayMetrics().density;
-            float lockThresholdPx = LOCK_THRESHOLD_DP * getResources().getDisplayMetrics().density;
+            float initialX = event.getRawX();
+            float initialY = event.getRawY();
 
             switch (event.getAction()) {
                 case MotionEvent.ACTION_DOWN:
-                    if (checkPermissions()) startRecording(); else requestPermissions();
+                    if (checkPermissions()) {
+                        startRecording();
+                    } else {
+                        requestPermissions();
+                    }
                     return true;
                 case MotionEvent.ACTION_MOVE:
                     if (isRecording && !isLocked) {
-                        if (initialY - event.getY() > lockThresholdPx) {
+                        float currentX = event.getRawX();
+                        float currentY = event.getRawY();
+
+                        if (initialY - currentY > 150) {
                             lockRecording();
-                        } else if (event.getX() < initialX - cancelThresholdPx) {
+                        }
+                        else if (initialX - currentX > 150) {
                             tvSlideToCancel.setText("Release to cancel");
                         } else {
                             tvSlideToCancel.setText("< Slide to cancel");
@@ -248,7 +357,8 @@ public class ChatbotActivity extends AppCompatActivity implements ChatAdapter.On
                 case MotionEvent.ACTION_UP:
                     v.performClick();
                     if (isRecording && !isLocked) {
-                        if (event.getX() < initialX - cancelThresholdPx) {
+                        float finalX = event.getRawX();
+                        if (initialX - finalX > 150) {
                             cancelRecording();
                         } else {
                             stopAndSendRecording();
@@ -265,7 +375,6 @@ public class ChatbotActivity extends AppCompatActivity implements ChatAdapter.On
         btnSendVoice.setOnClickListener(v -> sendRecording());
     }
 
-    // --- Recording Logic ---
     private void startRecording() {
         try {
             audioFile = File.createTempFile("voice_input", ".3gp", getCacheDir());
@@ -311,13 +420,11 @@ public class ChatbotActivity extends AppCompatActivity implements ChatAdapter.On
             isRecording = false;
             timerHandler.removeCallbacks(updateTimer);
             if (audioFile != null) audioFile.delete();
-            addUserMessage("Voice recording cancelled.", null);
         } catch (Exception e) { e.printStackTrace(); } finally {
             resetInputUI();
         }
     }
 
-    // --- Review Panel Logic ---
     private void stopRecordingAndShowReview() {
         if (!isRecording) return;
         try {
@@ -377,10 +484,8 @@ public class ChatbotActivity extends AppCompatActivity implements ChatAdapter.On
         resetInputUI();
     }
 
-    // --- Playback from Chat Bubble ---
     @Override
     public void onPlayButtonClick(String filePath, ImageButton playButton, SeekBar seekBar, TextView durationView) {
-        // If another audio file is already playing, stop it first.
         if (chatPlayer != null && chatPlayer.isPlaying()) {
             chatPlayer.stop();
             chatPlayer.release();
@@ -390,7 +495,6 @@ public class ChatbotActivity extends AppCompatActivity implements ChatAdapter.On
             if (currentlyPlayingSeekBar != null) {
                 currentlyPlayingSeekBar.setProgress(0);
             }
-            // If the user clicked the same button that was playing, it was a "stop" action.
             if (filePath.equals(currentlyPlayingFilePath)) {
                 chatPlayer = null;
                 return;
@@ -398,21 +502,18 @@ public class ChatbotActivity extends AppCompatActivity implements ChatAdapter.On
         }
 
         try {
-            // Store the views of the item that is now playing
             currentlyPlayingFilePath = filePath;
             currentlyPlayingButton = playButton;
             currentlyPlayingSeekBar = seekBar;
 
-            // Start playback
             chatPlayer = new MediaPlayer();
             chatPlayer.setDataSource(filePath);
             chatPlayer.prepare();
             chatPlayer.start();
 
-            playButton.setImageResource(R.drawable.ic_pause); // Change icon to pause
+            playButton.setImageResource(R.drawable.ic_pause);
             seekBar.setMax(chatPlayer.getDuration());
 
-            // When playback finishes, reset everything
             chatPlayer.setOnCompletionListener(mp -> {
                 playButton.setImageResource(R.drawable.ic_play_arrow);
                 seekBar.setProgress(0);
@@ -421,22 +522,22 @@ public class ChatbotActivity extends AppCompatActivity implements ChatAdapter.On
                 currentlyPlayingFilePath = null;
             });
 
-            // Create a new Runnable to update the SeekBar progress
-            timerHandler.post(new Runnable() {
+            Runnable updateChatSeekBarRunnable = new Runnable() {
                 @Override
                 public void run() {
-                    // Check if this is still the currently playing item
                     if (chatPlayer != null && chatPlayer.isPlaying() && seekBar.equals(currentlyPlayingSeekBar)) {
                         seekBar.setProgress(chatPlayer.getCurrentPosition());
-                        timerHandler.postDelayed(this, 500); // Update every half second
+                        chatSeekBarHandler.postDelayed(this, 500);
                     }
                 }
-            });
+            };
+            chatSeekBarHandler.post(updateChatSeekBarRunnable);
 
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
     private void resetInputUI() {
         textInputLayout.setVisibility(View.VISIBLE);
         voiceRecordingLayout.setVisibility(View.GONE);
@@ -483,16 +584,16 @@ public class ChatbotActivity extends AppCompatActivity implements ChatAdapter.On
 
         api.sendAudio(audioBody, languageBody).enqueue(new Callback<Map<String, String>>() {
             @Override
-            public void onResponse(Call<Map<String, String>> call, Response<Map<String, String>> response) {
+            public void onResponse(@NonNull Call<Map<String, String>> call, @NonNull Response<Map<String, String>> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     String text = response.body().get("text");
-                    chatMessages.get(chatMessages.size() - 1).setMessage(text); // Just set the text, no emoji here
+                    chatMessages.get(chatMessages.size() - 1).setMessage("🎤 " + text);
                     chatAdapter.notifyItemChanged(chatMessages.size() - 1);
                     sendMessageToBot(text);
                 } else { addBotMessage("⚠️ Failed to transcribe."); }
             }
             @Override
-            public void onFailure(Call<Map<String, String>> call, Throwable t) {
+            public void onFailure(@NonNull Call<Map<String, String>> call, @NonNull Throwable t) {
                 addBotMessage("❌ Transcription Error.");
             }
         });
@@ -510,64 +611,10 @@ public class ChatbotActivity extends AppCompatActivity implements ChatAdapter.On
         recyclerView.scrollToPosition(chatMessages.size() - 1);
     }
 
-    // Original addUserMessage now calls the new one for compatibility
-    private void addUserMessage(String message) {
-        addUserMessage(message, null);
-    }
-
     private void addBotMessage(String message) {
         chatMessages.add(new ChatMessage(message, ChatMessage.TYPE_BOT));
         chatAdapter.notifyItemInserted(chatMessages.size() - 1);
         recyclerView.scrollToPosition(chatMessages.size() - 1);
-    }
-
-    private void sendMessageToBot(String userMessage) {
-        Map<String, String> body = new HashMap<>();
-        body.put("message", userMessage);
-        api.sendMessage(body).enqueue(new Callback<Map<String, String>>() {
-            @Override
-            public void onResponse(Call<Map<String, String>> call, Response<Map<String, String>> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    String reply = response.body().get("reply");
-                    addBotMessage(reply);
-                    speakText(reply);
-                } else {
-                    addBotMessage("⚠️ Failed to get response from server.");
-                }
-            }
-            @Override
-            public void onFailure(Call<Map<String, String>> call, Throwable t) {
-                addBotMessage("❌ Error: " + t.getMessage());
-            }
-        });
-    }
-
-    private void setupMenuListener() {
-        btnMenu.setOnClickListener(v -> {
-            PopupMenu popup = new PopupMenu(ChatbotActivity.this, v);
-            popup.getMenuInflater().inflate(R.menu.chatbot_menu, popup.getMenu());
-            popup.setOnMenuItemClickListener(item -> {
-                int id = item.getItemId();
-                if (id == R.id.menu_jobs) {
-                    loadFragment(new JobsFragment());
-                    return true;
-                } else if (id == R.id.menu_skills) {
-                    loadFragment(new SkillsFragment());
-                    return true;
-                } else if (id == R.id.menu_counseling) {
-                    loadFragment(new CounselingFragment());
-                    return true;
-                } else if (id == R.id.menu_profile) {
-                    startActivity(new Intent(ChatbotActivity.this, EditProfileActivity.class));
-                    return true;
-                } else if (id == R.id.menu_settings) {
-                    startActivity(new Intent(ChatbotActivity.this, SettingsActivity.class));
-                    return true;
-                }
-                return false;
-            });
-            popup.show();
-        });
     }
 
     private void loadUserNameAndCheckProfile() {
@@ -623,12 +670,6 @@ public class ChatbotActivity extends AppCompatActivity implements ChatAdapter.On
         }
     }
 
-    public void speakText(String text) {
-        if (tts != null) {
-            tts.speak(text, TextToSpeech.QUEUE_FLUSH, null, null);
-        }
-    }
-
     private boolean checkPermissions() {
         return ActivityCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED;
     }
@@ -638,7 +679,7 @@ public class ChatbotActivity extends AppCompatActivity implements ChatAdapter.On
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == PERMISSION_REQUEST_CODE) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {

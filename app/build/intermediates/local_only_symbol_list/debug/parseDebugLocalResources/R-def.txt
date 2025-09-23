@@ -107,6 +107,7 @@ id googleIcon
 id googleText
 id handleArrow
 id inputArea
+id ivBotIcon
 id ivLock
 id ivProfile
 id ivProfileImage
@@ -115,6 +116,7 @@ id layoutImage
 id layoutInfo
 id main
 id mainImage
+id menu_auto_speak
 id menu_counseling
 id menu_jobs
 id menu_profile
