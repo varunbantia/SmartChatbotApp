@@ -58,6 +58,7 @@ dependencies {
     implementation("com.squareup.okhttp3:logging-interceptor:4.9.3")
     implementation("com.google.mlkit:translate:17.0.2")
     implementation("com.google.mlkit:language-id:17.0.4")
+    implementation("com.firebaseui:firebase-ui-firestore:8.0.2")
 
 
 }

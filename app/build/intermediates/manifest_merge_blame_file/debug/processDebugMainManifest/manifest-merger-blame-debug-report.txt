@@ -9,13 +9,13 @@
 9        android:targetSdkVersion="36" />
 10
 11    <uses-permission android:name="android.permission.INTERNET" />
-11-->C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:5:5-66
+11-->C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:5:5-67
 11-->C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:5:22-64
 12    <uses-permission android:name="android.permission.RECORD_AUDIO" />
-12-->C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:6:5-70
+12-->C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:6:5-71
 12-->C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:6:22-68
 13    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-13-->C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:7:5-80
+13-->C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:7:5-81
 13-->C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:7:22-78
 14    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 14-->[com.google.mlkit:translate:17.0.2] C:\Users\vbant\.gradle\caches\8.13\transforms\e62615b6329ecf63a363c968577f1432\transformed\translate-17.0.2\AndroidManifest.xml:7:5-79
@@ -51,19 +51,19 @@
 26-->[androidx.core:core:1.13.0] C:\Users\vbant\.gradle\caches\8.13\transforms\099480ad6f7c73f223a215beb2ae3c7e\transformed\core-1.13.0\AndroidManifest.xml:26:22-94
 27
 28    <application
-28-->C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:8:5-38:19
+28-->C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:9:5-51:19
 29        android:allowBackup="true"
-29-->C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:9:9-35
+29-->C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:10:9-35
 30        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
 30-->[androidx.core:core:1.13.0] C:\Users\vbant\.gradle\caches\8.13\transforms\099480ad6f7c73f223a215beb2ae3c7e\transformed\core-1.13.0\AndroidManifest.xml:28:18-86
 31        android:dataExtractionRules="@xml/data_extraction_rules"
-31-->C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:10:9-65
+31-->C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:11:9-65
 32        android:debuggable="true"
 33        android:extractNativeLibs="false"
 34        android:fullBackupContent="@xml/backup_rules"
-34-->C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:11:9-54
+34-->C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:12:9-54
 35        android:icon="@mipmap/ic_launcher"
-35-->C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:12:9-43
+35-->C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:13:9-43
 36        android:label="@string/app_name"
 36-->C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:14:9-41
 37        android:roundIcon="@mipmap/ic_launcher_round"
@@ -74,66 +74,69 @@
 40        android:theme="@style/Theme.SmartChatBot"
 40-->C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:17:9-50
 41        android:usesCleartextTraffic="true" >
-41-->C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:13:9-44
-42
-43        <!-- Launcher Activity: Opens Chatbot directly -->
-44        <activity
-44-->C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:20:9-28:20
-45            android:name="com.example.smartchatbot.dashboard.ChatbotActivity"
-45-->C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:21:13-54
-46            android:exported="true"
-46-->C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:22:13-36
-47            android:windowSoftInputMode="adjustResize|stateHidden" >
-47-->C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:23:13-67
-48            <intent-filter>
-48-->C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:24:13-27:29
-49                <action android:name="android.intent.action.MAIN" />
-49-->C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:25:17-69
-49-->C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:25:25-66
-50
-51                <category android:name="android.intent.category.LAUNCHER" />
-51-->C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:26:17-77
-51-->C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:26:27-74
-52            </intent-filter>
-53        </activity>
-54
-55        <!-- Other Activities inherit the same theme -->
+41-->C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:18:9-44
+42        <activity
+42-->C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:19:9-21:40
+43            android:name="com.example.smartchatbot.dashboard.ChatbotActivity"
+43-->C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:20:13-54
+44            android:exported="false" />
+44-->C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:21:13-37
+45        <!-- Launcher Activity: Opens Chatbot directly -->
+46        <activity
+46-->C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:23:9-32:20
+47            android:name="com.example.smartchatbot.auth.LoginActivity"
+47-->C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:24:13-47
+48            android:exported="true"
+48-->C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:25:13-36
+49            android:windowSoftInputMode="adjustResize|stateHidden" >
+49-->C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:26:13-67
+50            <intent-filter>
+50-->C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:27:13-31:29
+51                <action android:name="android.intent.action.MAIN" />
+51-->C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:28:17-69
+51-->C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:28:25-66
+52
+53                <category android:name="android.intent.category.LAUNCHER" />
+53-->C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:30:17-77
+53-->C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:30:27-74
+54            </intent-filter>
+55        </activity> <!-- Other Activities inherit the same theme -->
 56        <activity
-56-->C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:31:9-85
+56-->C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:33:9-35:40
 57            android:name="com.example.smartchatbot.dashboard.MainActivity"
-57-->C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:31:19-57
+57-->C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:34:13-51
 58            android:exported="false" />
-58-->C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:31:58-82
+58-->C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:35:13-37
 59        <activity
-59-->C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:32:9-88
+59-->C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:36:9-38:40
 60            android:name="com.example.smartchatbot.settings.SettingsActivity"
-60-->C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:32:19-60
+60-->C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:37:13-54
 61            android:exported="false" />
-61-->C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:32:61-85
+61-->C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:38:13-37
 62        <activity
-62-->C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:33:9-90
+62-->C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:39:9-41:40
 63            android:name="com.example.smartchatbot.profile.EditProfileActivity"
-63-->C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:33:19-62
+63-->C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:40:13-56
 64            android:exported="false" />
-64-->C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:33:63-87
+64-->C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:41:13-37
 65        <activity
-65-->C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:34:9-90
+65-->C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:42:9-44:40
 66            android:name="com.example.smartchatbot.auth.ForgotPasswordActivity"
-66-->C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:34:19-62
+66-->C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:43:13-56
 67            android:exported="false" />
-67-->C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:34:63-87
+67-->C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:44:13-37
 68        <activity
-68-->C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:35:9-82
+68-->C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:45:9-47:40
 69            android:name="com.example.smartchatbot.auth.SignupActivity"
-69-->C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:35:19-54
+69-->C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:46:13-48
 70            android:exported="false" />
-70-->C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:35:55-79
+70-->C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:47:13-37
 71        <activity
-71-->C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:36:9-81
-72            android:name="com.example.smartchatbot.auth.LoginActivity"
-72-->C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:36:19-53
+71-->C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:48:9-50:40
+72            android:name="com.example.smartchatbot.chatbot.ChatHistoryActivity"
+72-->C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:49:13-56
 73            android:exported="false" />
-73-->C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:36:54-78
+73-->C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:50:13-37
 74
 75        <service
 75-->[com.google.mlkit:translate:17.0.2] C:\Users\vbant\.gradle\caches\8.13\transforms\e62615b6329ecf63a363c968577f1432\transformed\translate-17.0.2\AndroidManifest.xml:11:9-17:19

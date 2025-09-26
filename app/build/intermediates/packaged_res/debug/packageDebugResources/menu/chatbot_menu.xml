@@ -32,7 +32,7 @@
         android:icon="@drawable/ic_settings"
         app:showAsAction="never"/>
     <item
-        android:id="@+id/menu_auto_speak"
-        android:title="Auto-Speak New Messages"
-        android:checkable="true" />
+        android:id="@+id/menu_history"
+        android:title="Chat History"
+        />
 </menu>

@@ -39,10 +39,12 @@
         android:testOnly="true"
         android:theme="@style/Theme.SmartChatBot"
         android:usesCleartextTraffic="true" >
-
-        <!-- Launcher Activity: Opens Chatbot directly -->
         <activity
             android:name="com.example.smartchatbot.dashboard.ChatbotActivity"
+            android:exported="false" />
+        <!-- Launcher Activity: Opens Chatbot directly -->
+        <activity
+            android:name="com.example.smartchatbot.auth.LoginActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustResize|stateHidden" >
             <intent-filter>
@@ -50,9 +52,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-
-        <!-- Other Activities inherit the same theme -->
+        </activity> <!-- Other Activities inherit the same theme -->
         <activity
             android:name="com.example.smartchatbot.dashboard.MainActivity"
             android:exported="false" />
@@ -69,7 +69,7 @@
             android:name="com.example.smartchatbot.auth.SignupActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.smartchatbot.auth.LoginActivity"
+            android:name="com.example.smartchatbot.chatbot.ChatHistoryActivity"
             android:exported="false" />
 
         <service

@@ -9,6 +9,9 @@ array work_experience
 color app_primary_blue
 color black
 color blue_500
+color gray_400
+color gray_500
+color gray_700
 color purple_200
 color purple_500
 color purple_700
@@ -25,6 +28,7 @@ drawable circle_shape
 drawable edittext_bg
 drawable google_button_bg
 drawable handle_bg
+drawable ic_add_chat
 drawable ic_bot
 drawable ic_close
 drawable ic_counseling
@@ -38,6 +42,7 @@ drawable ic_logo
 drawable ic_logout
 drawable ic_mic
 drawable ic_more_vert
+drawable ic_no_chats
 drawable ic_pause
 drawable ic_play_arrow
 drawable ic_recording_dot
@@ -83,6 +88,7 @@ id btnTheme
 id btnUploadImage
 id btnUploadResume
 id cbTerms
+id emptyStateLayout
 id etConfirmPassword
 id etDob
 id etEducation
@@ -99,6 +105,7 @@ id etPhone
 id etQualification
 id etSkills
 id etUsername
+id fabNewChat
 id forgotPasswordCard
 id forgotPasswordHeader
 id formContainer
@@ -116,8 +123,8 @@ id layoutImage
 id layoutInfo
 id main
 id mainImage
-id menu_auto_speak
 id menu_counseling
+id menu_history
 id menu_jobs
 id menu_profile
 id menu_settings
@@ -125,6 +132,7 @@ id menu_skills
 id progressBar
 id recyclerView
 id reviewVoiceLayout
+id rvChatHistory
 id seekBarBubble
 id slideButton
 id slideHandle
@@ -141,7 +149,11 @@ id tvCurrentTheme
 id tvDob
 id tvDurationBubble
 id tvEmail
+id tvEmptyStateSubtitle
+id tvEmptyStateTitle
 id tvForgotPassword
+id tvHeader
+id tvLastMessage
 id tvName
 id tvPhone
 id tvRecordingTime
@@ -149,6 +161,7 @@ id tvResume
 id tvResumeName
 id tvSignupLink
 id tvSlideToCancel
+id tvTimestamp
 id tvUserMessage
 id tvVoiceDuration
 id tvWelcome
@@ -157,6 +170,7 @@ id voiceSeekBar
 id welcomeCard
 id welcomeSection
 id welcomeSubtitle
+layout activity_chat_history
 layout activity_chatbot
 layout activity_edit_profile
 layout activity_forgot_password
@@ -171,6 +185,7 @@ layout fragment_counseling
 layout fragment_jobs
 layout fragment_profile
 layout fragment_skills
+layout item_chat_history
 layout item_chat_user_text
 layout item_chat_user_voice
 menu chatbot_menu

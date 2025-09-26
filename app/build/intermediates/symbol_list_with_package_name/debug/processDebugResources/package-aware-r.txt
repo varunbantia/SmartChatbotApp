@@ -1489,6 +1489,9 @@ color error_color_material_dark
 color error_color_material_light
 color foreground_material_dark
 color foreground_material_light
+color gray_400
+color gray_500
+color gray_700
 color highlighted_text_material_dark
 color highlighted_text_material_light
 color m3_appbar_overlay_color
@@ -2147,6 +2150,7 @@ color mtrl_textinput_focused_box_stroke_color
 color mtrl_textinput_hovered_box_stroke_color
 color notification_action_color_filter
 color notification_icon_bg_color
+color notification_material_background_media_default_color
 color primary_dark_material_dark
 color primary_dark_material_light
 color primary_material_dark
@@ -2972,6 +2976,10 @@ dimen notification_small_icon_size_as_large
 dimen notification_subtext_size
 dimen notification_top_pad
 dimen notification_top_pad_large_text
+dimen subtitle_corner_radius
+dimen subtitle_outline_width
+dimen subtitle_shadow_offset
+dimen subtitle_shadow_radius
 dimen tooltip_corner_radius
 dimen tooltip_horizontal_padding
 dimen tooltip_margin
@@ -3105,6 +3113,7 @@ drawable google_button_bg
 drawable googleg_disabled_color_18
 drawable googleg_standard_color_18
 drawable handle_bg
+drawable ic_add_chat
 drawable ic_arrow_back_black_24
 drawable ic_bot
 drawable ic_call_answer
@@ -3135,6 +3144,7 @@ drawable ic_mtrl_checked_circle
 drawable ic_mtrl_chip_checked_black
 drawable ic_mtrl_chip_checked_circle
 drawable ic_mtrl_chip_close_circle
+drawable ic_no_chats
 drawable ic_other_sign_in
 drawable ic_passkey
 drawable ic_password
@@ -3281,6 +3291,7 @@ id accessibility_custom_action_6
 id accessibility_custom_action_7
 id accessibility_custom_action_8
 id accessibility_custom_action_9
+id action0
 id actionDown
 id actionDownUp
 id actionUp
@@ -3371,6 +3382,7 @@ id btnUploadResume
 id buttonPanel
 id cache_measures
 id callMeasure
+id cancel_action
 id cancel_button
 id carryVelocity
 id cbTerms
@@ -3448,9 +3460,11 @@ id edit_query
 id edit_text_id
 id elastic
 id embed
+id emptyStateLayout
 id enabled
 id end
 id endToStart
+id end_padder
 id enterAlways
 id enterAlwaysCollapsed
 id escape
@@ -3473,6 +3487,7 @@ id etUsername
 id exitUntilCollapsed
 id expand_activities_button
 id expanded_menu
+id fabNewChat
 id fade
 id fill
 id fill_horizontal
@@ -3580,8 +3595,9 @@ id material_timepicker_ok_button
 id material_timepicker_view
 id material_value_index
 id matrix
-id menu_auto_speak
+id media_actions
 id menu_counseling
+id menu_history
 id menu_jobs
 id menu_profile
 id menu_settings
@@ -3691,6 +3707,7 @@ id right_icon
 id right_side
 id rounded
 id row_index_key
+id rvChatHistory
 id save_non_transition_alpha
 id save_overlay_view
 id sawtooth
@@ -3752,6 +3769,7 @@ id startToEnd
 id startVertical
 id staticLayout
 id staticPostLayout
+id status_bar_latest_event_content
 id step1Layout
 id step2Layout
 id step3Layout
@@ -3818,7 +3836,11 @@ id tvCurrentTheme
 id tvDob
 id tvDurationBubble
 id tvEmail
+id tvEmptyStateSubtitle
+id tvEmptyStateTitle
 id tvForgotPassword
+id tvHeader
+id tvLastMessage
 id tvName
 id tvPhone
 id tvRecordingTime
@@ -3826,6 +3848,7 @@ id tvResume
 id tvResumeName
 id tvSignupLink
 id tvSlideToCancel
+id tvTimestamp
 id tvUserMessage
 id tvVoiceDuration
 id tvWelcome
@@ -3975,6 +3998,7 @@ layout abc_search_dropdown_item_icons_2line
 layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
+layout activity_chat_history
 layout activity_chatbot
 layout activity_edit_profile
 layout activity_forgot_password
@@ -4009,6 +4033,7 @@ layout fragment_profile
 layout fragment_skills
 layout ime_base_split_test_activity
 layout ime_secondary_split_test_activity
+layout item_chat_history
 layout item_chat_user_text
 layout item_chat_user_voice
 layout m3_alert_dialog
@@ -4064,8 +4089,17 @@ layout mtrl_search_bar
 layout mtrl_search_view
 layout notification_action
 layout notification_action_tombstone
+layout notification_media_action
+layout notification_media_cancel_action
+layout notification_template_big_media
+layout notification_template_big_media_custom
+layout notification_template_big_media_narrow
+layout notification_template_big_media_narrow_custom
 layout notification_template_custom_big
 layout notification_template_icon_group
+layout notification_template_lines_media
+layout notification_template_media
+layout notification_template_media_custom
 layout notification_template_part_chronometer
 layout notification_template_part_time
 layout select_dialog_item_material
@@ -4733,9 +4767,14 @@ style TextAppearance_AppCompat_Widget_Switch
 style TextAppearance_AppCompat_Widget_TextView_SpinnerItem
 style TextAppearance_Compat_Notification
 style TextAppearance_Compat_Notification_Info
+style TextAppearance_Compat_Notification_Info_Media
 style TextAppearance_Compat_Notification_Line2
+style TextAppearance_Compat_Notification_Line2_Media
+style TextAppearance_Compat_Notification_Media
 style TextAppearance_Compat_Notification_Time
+style TextAppearance_Compat_Notification_Time_Media
 style TextAppearance_Compat_Notification_Title
+style TextAppearance_Compat_Notification_Title_Media
 style TextAppearance_Design_CollapsingToolbar_Expanded
 style TextAppearance_Design_Counter
 style TextAppearance_Design_Counter_Overflow

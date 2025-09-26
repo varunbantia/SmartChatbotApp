@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:2:1-39:12
-INJECTED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:2:1-39:12
-INJECTED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:2:1-39:12
-INJECTED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:2:1-39:12
+ADDED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:2:1-53:12
+INJECTED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:2:1-53:12
+INJECTED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:2:1-53:12
+INJECTED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:2:1-53:12
 MERGED from [com.google.android.material:material:1.12.0] C:\Users\vbant\.gradle\caches\8.13\transforms\f77dea897a486a384fb250dd9c73c966\transformed\material-1.12.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.constraintlayout:constraintlayout:2.2.1] C:\Users\vbant\.gradle\caches\8.13\transforms\eebefee8d132cd25155efd39a20cdd49\transformed\constraintlayout-2.2.1\AndroidManifest.xml:2:1-9:12
 MERGED from [com.airbnb.android:lottie:6.4.0] C:\Users\vbant\.gradle\caches\8.13\transforms\00f2880f22b9fea384d99ec0fe64576a\transformed\lottie-6.4.0\AndroidManifest.xml:2:1-9:12
@@ -13,12 +13,14 @@ MERGED from [com.google.mlkit:language-id:17.0.4] C:\Users\vbant\.gradle\caches\
 MERGED from [com.google.mlkit:language-id-common:16.0.0] C:\Users\vbant\.gradle\caches\8.13\transforms\f44fcd6e9b64eff9ebd2aec3a3b17188\transformed\language-id-common-16.0.0\AndroidManifest.xml:17:1-32:12
 MERGED from [com.google.mlkit:common:18.10.0] C:\Users\vbant\.gradle\caches\8.13\transforms\b9f1c38fca323000dccedea4ddd109e3\transformed\common-18.10.0\AndroidManifest.xml:2:1-26:12
 MERGED from [androidx.appcompat:appcompat:1.7.1] C:\Users\vbant\.gradle\caches\8.13\transforms\b9cd3491d489ade1e0dc34728f150fff\transformed\appcompat-1.7.1\AndroidManifest.xml:2:1-7:12
+MERGED from [com.firebaseui:firebase-ui-firestore:8.0.2] C:\Users\vbant\.gradle\caches\8.13\transforms\6e3e077fce229ecb5c7f19a3a1824ab0\transformed\firebase-ui-firestore-8.0.2\AndroidManifest.xml:2:1-11:12
 MERGED from [com.google.firebase:firebase-auth:24.0.1] C:\Users\vbant\.gradle\caches\8.13\transforms\0a9ddfb940821e14effaa67c7cdfe220\transformed\firebase-auth-24.0.1\AndroidManifest.xml:17:1-75:12
 MERGED from [androidx.credentials:credentials:1.2.0-rc01] C:\Users\vbant\.gradle\caches\8.13\transforms\8614c13ce434cae0387e9f80a8bd2817\transformed\credentials-1.2.0-rc01\AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\vbant\.gradle\caches\8.13\transforms\3759ef1c1252cda984f1fb3e29499b73\transformed\credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:17:1-44:12
 MERGED from [com.google.android.gms:play-services-auth:20.7.0] C:\Users\vbant\.gradle\caches\8.13\transforms\18b6154ed4e01fa8b57636bae492fa3f\transformed\play-services-auth-20.7.0\AndroidManifest.xml:17:1-40:12
 MERGED from [com.github.bumptech.glide:glide:4.16.0] C:\Users\vbant\.gradle\caches\8.13\transforms\251ec883dfa63f3e1dd12bbcce706a21\transformed\glide-4.16.0\AndroidManifest.xml:2:1-9:12
 MERGED from [androidx.viewpager2:viewpager2:1.0.0] C:\Users\vbant\.gradle\caches\8.13\transforms\e0bc8b3932fdc9b38b5cf9322961595a\transformed\viewpager2-1.0.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.legacy:legacy-support-v4:1.0.0] C:\Users\vbant\.gradle\caches\8.13\transforms\0a3b40340e2be86423ec901d56f3eb05\transformed\legacy-support-v4-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [com.google.firebase:firebase-firestore:26.0.0] C:\Users\vbant\.gradle\caches\8.13\transforms\701eb0f6bffb2887f0fb67bfcbafe98b\transformed\firebase-firestore-26.0.0\AndroidManifest.xml:2:1-26:12
 MERGED from [com.google.android.gms:play-services-auth-api-phone:18.0.2] C:\Users\vbant\.gradle\caches\8.13\transforms\3f8f370145f8a8f8934fab0436ad0eca\transformed\play-services-auth-api-phone-18.0.2\AndroidManifest.xml:2:1-7:12
 MERGED from [com.google.firebase:firebase-storage:22.0.0] C:\Users\vbant\.gradle\caches\8.13\transforms\66dc89f505d27eb9295bd902fc20ac1f\transformed\firebase-storage-22.0.0\AndroidManifest.xml:15:1-39:12
@@ -34,6 +36,7 @@ MERGED from [com.google.firebase:firebase-common:22.0.0] C:\Users\vbant\.gradle\
 MERGED from [com.google.firebase:firebase-appcheck-interop:17.1.0] C:\Users\vbant\.gradle\caches\8.13\transforms\a3ec094db94cdef31c96dda49610543e\transformed\firebase-appcheck-interop-17.1.0\AndroidManifest.xml:15:1-23:12
 MERGED from [com.google.android.gms:play-services-auth-base:18.0.4] C:\Users\vbant\.gradle\caches\8.13\transforms\21360395ab3c7e44caeed7655f343912\transformed\play-services-auth-base-18.0.4\AndroidManifest.xml:2:1-7:12
 MERGED from [com.google.android.gms:play-services-fido:20.1.0] C:\Users\vbant\.gradle\caches\8.13\transforms\513980683677119ebd336be5c2db1acf\transformed\play-services-fido-20.1.0\AndroidManifest.xml:2:1-10:12
+MERGED from [androidx.paging:paging-rxjava3:3.0.0] C:\Users\vbant\.gradle\caches\8.13\transforms\6ac627be61773fa7886e54fc0aaf8b2f\transformed\paging-rxjava3-3.0.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.datastore:datastore-core-android:1.1.3] C:\Users\vbant\.gradle\caches\8.13\transforms\0971b9b1955c1cc97a83be742d962781\transformed\datastore-core-release\AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.datastore:datastore-android:1.1.3] C:\Users\vbant\.gradle\caches\8.13\transforms\0a0d563d46c6214c11edfe3398885ae3\transformed\datastore-release\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.datastore:datastore-preferences-android:1.1.3] C:\Users\vbant\.gradle\caches\8.13\transforms\d8ac479967e8b14e5388821da025362d\transformed\datastore-preferences-release\AndroidManifest.xml:17:1-22:12
@@ -45,6 +48,7 @@ MERGED from [androidx.privacysandbox.ads:ads-adservices:1.1.0-beta11] C:\Users\v
 MERGED from [androidx.core:core-ktx:1.13.0] C:\Users\vbant\.gradle\caches\8.13\transforms\7183dc7a77622ebaaaf425b4b151e234\transformed\core-ktx-1.13.0\AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.emoji2:emoji2-views-helper:1.3.0] C:\Users\vbant\.gradle\caches\8.13\transforms\61b82acd35e83e2ee31a73e9496c8ab0\transformed\emoji2-views-helper-1.3.0\AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.emoji2:emoji2:1.3.0] C:\Users\vbant\.gradle\caches\8.13\transforms\8b897ea9378b5aa08581582f853a4316\transformed\emoji2-1.3.0\AndroidManifest.xml:17:1-35:12
+MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] C:\Users\vbant\.gradle\caches\8.13\transforms\8ded80f716141f20ef829f210cc9a424\transformed\legacy-support-core-ui-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.drawerlayout:drawerlayout:1.1.1] C:\Users\vbant\.gradle\caches\8.13\transforms\ca4943d78be86ebf3e6a28f1472f6bd2\transformed\drawerlayout-1.1.1\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] C:\Users\vbant\.gradle\caches\8.13\transforms\5bd90c6535a2d434b0be32e58c953a58\transformed\coordinatorlayout-1.1.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.transition:transition:1.5.0] C:\Users\vbant\.gradle\caches\8.13\transforms\2a8c7e40c5c87b51a2cf4617b5bd6e00\transformed\transition-1.5.0\AndroidManifest.xml:2:1-7:12
@@ -55,12 +59,17 @@ MERGED from [androidx.browser:browser:1.4.0] C:\Users\vbant\.gradle\caches\8.13\
 MERGED from [com.google.android.gms:play-services-stats:17.0.2] C:\Users\vbant\.gradle\caches\8.13\transforms\7fa741b1b3027f98bde6d04dca6fc130\transformed\play-services-stats-17.0.2\AndroidManifest.xml:2:1-9:12
 MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] C:\Users\vbant\.gradle\caches\8.13\transforms\f118d0cb6b4ea562705935110ded9301\transformed\legacy-support-core-utils-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.loader:loader:1.0.0] C:\Users\vbant\.gradle\caches\8.13\transforms\9ae7a1dbe4469cab9e0ee7c8ac0a2df9\transformed\loader-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.recyclerview:recyclerview:1.2.1] C:\Users\vbant\.gradle\caches\8.13\transforms\3294798f9e7bbfd23009d92c210419cc\transformed\recyclerview-1.2.1\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\vbant\.gradle\caches\8.13\transforms\96aaecafe5006d50eb9be0cca8b95589\transformed\viewpager-1.0.0\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.recyclerview:recyclerview:1.1.0] C:\Users\vbant\.gradle\caches\8.13\transforms\c24f24e42159b60dd67eee4fa64e36b8\transformed\recyclerview-1.1.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] C:\Users\vbant\.gradle\caches\8.13\transforms\8805d6a7784448ae221388f76c0b5e7b\transformed\slidingpanelayout-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.customview:customview:1.1.0] C:\Users\vbant\.gradle\caches\8.13\transforms\ef7ec8914ce008dd1506fc4a5529bea3\transformed\customview-1.1.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.media:media:1.0.0] C:\Users\vbant\.gradle\caches\8.13\transforms\47733658d5fab61cadd10961ecafe715\transformed\media-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] C:\Users\vbant\.gradle\caches\8.13\transforms\bad98fd2f7bce9a67e65db9edd37564b\transformed\swiperefreshlayout-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] C:\Users\vbant\.gradle\caches\8.13\transforms\7c6b7fe566df322d086277dc379680be\transformed\asynclayoutinflater-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [com.google.firebase:firebase-database-collection:18.0.1] C:\Users\vbant\.gradle\caches\8.13\transforms\5bc8538275bc5a453cd09dc43139a709\transformed\firebase-database-collection-18.0.1\AndroidManifest.xml:2:1-9:12
 MERGED from [com.google.android.gms:play-services-base:18.5.0] C:\Users\vbant\.gradle\caches\8.13\transforms\96c0132b4d11abb73c448a8e9cd522b1\transformed\play-services-base-18.5.0\AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.core:core:1.13.0] C:\Users\vbant\.gradle\caches\8.13\transforms\099480ad6f7c73f223a215beb2ae3c7e\transformed\core-1.13.0\AndroidManifest.xml:17:1-30:12
+MERGED from [com.firebaseui:firebase-ui-common:8.0.2] C:\Users\vbant\.gradle\caches\8.13\transforms\322fbf45addeff07865f0081f60eae73\transformed\firebase-ui-common-8.0.2\AndroidManifest.xml:2:1-9:12
 MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.6.2] C:\Users\vbant\.gradle\caches\8.13\transforms\fd1a1ac8ee2e2609373d9543f4b3acb9\transformed\lifecycle-viewmodel-2.6.2\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.lifecycle:lifecycle-process:2.6.2] C:\Users\vbant\.gradle\caches\8.13\transforms\9c6f6739b72b4cd8581425a08e64a1d4\transformed\lifecycle-process-2.6.2\AndroidManifest.xml:17:1-35:12
 MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.6.2] C:\Users\vbant\.gradle\caches\8.13\transforms\9b2c027b7ab948ded275479f33859dec\transformed\lifecycle-livedata-core-2.6.2\AndroidManifest.xml:17:1-22:12
@@ -107,15 +116,17 @@ MERGED from [com.google.android.play:core-common:2.0.3] C:\Users\vbant\.gradle\c
 	android:versionName
 		INJECTED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml
 	xmlns:tools
-		ADDED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:4:5-51
+		ADDED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:3:5-51
 	android:versionCode
 		INJECTED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml
 	xmlns:android
 		ADDED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:2:11-69
 uses-permission#android.permission.INTERNET
-ADDED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:5:5-66
+ADDED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:5:5-67
 MERGED from [com.google.mlkit:translate:17.0.2] C:\Users\vbant\.gradle\caches\8.13\transforms\e62615b6329ecf63a363c968577f1432\transformed\translate-17.0.2\AndroidManifest.xml:8:5-67
 MERGED from [com.google.mlkit:translate:17.0.2] C:\Users\vbant\.gradle\caches\8.13\transforms\e62615b6329ecf63a363c968577f1432\transformed\translate-17.0.2\AndroidManifest.xml:8:5-67
+MERGED from [com.firebaseui:firebase-ui-firestore:8.0.2] C:\Users\vbant\.gradle\caches\8.13\transforms\6e3e077fce229ecb5c7f19a3a1824ab0\transformed\firebase-ui-firestore-8.0.2\AndroidManifest.xml:9:5-67
+MERGED from [com.firebaseui:firebase-ui-firestore:8.0.2] C:\Users\vbant\.gradle\caches\8.13\transforms\6e3e077fce229ecb5c7f19a3a1824ab0\transformed\firebase-ui-firestore-8.0.2\AndroidManifest.xml:9:5-67
 MERGED from [com.google.firebase:firebase-auth:24.0.1] C:\Users\vbant\.gradle\caches\8.13\transforms\0a9ddfb940821e14effaa67c7cdfe220\transformed\firebase-auth-24.0.1\AndroidManifest.xml:25:5-67
 MERGED from [com.google.firebase:firebase-auth:24.0.1] C:\Users\vbant\.gradle\caches\8.13\transforms\0a9ddfb940821e14effaa67c7cdfe220\transformed\firebase-auth-24.0.1\AndroidManifest.xml:25:5-67
 MERGED from [com.google.firebase:firebase-firestore:26.0.0] C:\Users\vbant\.gradle\caches\8.13\transforms\701eb0f6bffb2887f0fb67bfcbafe98b\transformed\firebase-firestore-26.0.0\AndroidManifest.xml:11:5-67
@@ -139,16 +150,16 @@ MERGED from [com.google.android.datatransport:transport-backend-cct:2.3.3] C:\Us
 	android:name
 		ADDED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:5:22-64
 uses-permission#android.permission.RECORD_AUDIO
-ADDED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:6:5-70
+ADDED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:6:5-71
 	android:name
 		ADDED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:6:22-68
 uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
-ADDED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:7:5-80
+ADDED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:7:5-81
 	android:name
 		ADDED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:7:22-78
 application
-ADDED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:8:5-38:19
-INJECTED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:8:5-38:19
+ADDED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:9:5-51:19
+INJECTED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:9:5-51:19
 MERGED from [com.google.android.material:material:1.12.0] C:\Users\vbant\.gradle\caches\8.13\transforms\f77dea897a486a384fb250dd9c73c966\transformed\material-1.12.0\AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.material:material:1.12.0] C:\Users\vbant\.gradle\caches\8.13\transforms\f77dea897a486a384fb250dd9c73c966\transformed\material-1.12.0\AndroidManifest.xml:22:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:2.2.1] C:\Users\vbant\.gradle\caches\8.13\transforms\eebefee8d132cd25155efd39a20cdd49\transformed\constraintlayout-2.2.1\AndroidManifest.xml:7:5-20
@@ -244,73 +255,79 @@ MERGED from [com.google.android.play:core-common:2.0.3] C:\Users\vbant\.gradle\c
 	android:label
 		ADDED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:14:9-41
 	android:fullBackupContent
-		ADDED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:11:9-54
+		ADDED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:12:9-54
 	android:roundIcon
 		ADDED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:15:9-54
 	android:icon
-		ADDED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:12:9-43
+		ADDED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:13:9-43
 	android:allowBackup
-		ADDED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:9:9-35
+		ADDED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:10:9-35
 	android:theme
 		ADDED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:17:9-50
 	android:dataExtractionRules
-		ADDED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:10:9-65
+		ADDED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:11:9-65
 	android:usesCleartextTraffic
-		ADDED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:13:9-44
+		ADDED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:18:9-44
 activity#com.example.smartchatbot.dashboard.ChatbotActivity
-ADDED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:20:9-28:20
-	android:windowSoftInputMode
-		ADDED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:23:13-67
+ADDED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:19:9-21:40
 	android:exported
-		ADDED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:22:13-36
+		ADDED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:21:13-37
 	android:name
-		ADDED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:21:13-54
-intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:24:13-27:29
-action#android.intent.action.MAIN
-ADDED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:25:17-69
-	android:name
-		ADDED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:25:25-66
-category#android.intent.category.LAUNCHER
-ADDED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:26:17-77
-	android:name
-		ADDED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:26:27-74
-activity#com.example.smartchatbot.dashboard.MainActivity
-ADDED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:31:9-85
-	android:exported
-		ADDED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:31:58-82
-	android:name
-		ADDED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:31:19-57
-activity#com.example.smartchatbot.settings.SettingsActivity
-ADDED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:32:9-88
-	android:exported
-		ADDED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:32:61-85
-	android:name
-		ADDED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:32:19-60
-activity#com.example.smartchatbot.profile.EditProfileActivity
-ADDED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:33:9-90
-	android:exported
-		ADDED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:33:63-87
-	android:name
-		ADDED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:33:19-62
-activity#com.example.smartchatbot.auth.ForgotPasswordActivity
-ADDED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:34:9-90
-	android:exported
-		ADDED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:34:63-87
-	android:name
-		ADDED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:34:19-62
-activity#com.example.smartchatbot.auth.SignupActivity
-ADDED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:35:9-82
-	android:exported
-		ADDED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:35:55-79
-	android:name
-		ADDED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:35:19-54
+		ADDED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:20:13-54
 activity#com.example.smartchatbot.auth.LoginActivity
-ADDED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:36:9-81
+ADDED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:23:9-32:20
+	android:windowSoftInputMode
+		ADDED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:26:13-67
 	android:exported
-		ADDED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:36:54-78
+		ADDED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:25:13-36
 	android:name
-		ADDED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:36:19-53
+		ADDED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:24:13-47
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:27:13-31:29
+action#android.intent.action.MAIN
+ADDED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:28:17-69
+	android:name
+		ADDED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:28:25-66
+category#android.intent.category.LAUNCHER
+ADDED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:30:17-77
+	android:name
+		ADDED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:30:27-74
+activity#com.example.smartchatbot.dashboard.MainActivity
+ADDED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:33:9-35:40
+	android:exported
+		ADDED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:35:13-37
+	android:name
+		ADDED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:34:13-51
+activity#com.example.smartchatbot.settings.SettingsActivity
+ADDED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:36:9-38:40
+	android:exported
+		ADDED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:38:13-37
+	android:name
+		ADDED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:37:13-54
+activity#com.example.smartchatbot.profile.EditProfileActivity
+ADDED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:39:9-41:40
+	android:exported
+		ADDED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:41:13-37
+	android:name
+		ADDED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:40:13-56
+activity#com.example.smartchatbot.auth.ForgotPasswordActivity
+ADDED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:42:9-44:40
+	android:exported
+		ADDED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:44:13-37
+	android:name
+		ADDED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:43:13-56
+activity#com.example.smartchatbot.auth.SignupActivity
+ADDED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:45:9-47:40
+	android:exported
+		ADDED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:47:13-37
+	android:name
+		ADDED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:46:13-48
+activity#com.example.smartchatbot.chatbot.ChatHistoryActivity
+ADDED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:48:9-50:40
+	android:exported
+		ADDED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:50:13-37
+	android:name
+		ADDED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml:49:13-56
 uses-sdk
 INJECTED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Users\vbant\AndroidStudioProjects\SmartChatBot\app\src\main\AndroidManifest.xml
@@ -333,6 +350,8 @@ MERGED from [com.google.mlkit:common:18.10.0] C:\Users\vbant\.gradle\caches\8.13
 MERGED from [com.google.mlkit:common:18.10.0] C:\Users\vbant\.gradle\caches\8.13\transforms\b9f1c38fca323000dccedea4ddd109e3\transformed\common-18.10.0\AndroidManifest.xml:6:5-44
 MERGED from [androidx.appcompat:appcompat:1.7.1] C:\Users\vbant\.gradle\caches\8.13\transforms\b9cd3491d489ade1e0dc34728f150fff\transformed\appcompat-1.7.1\AndroidManifest.xml:5:5-44
 MERGED from [androidx.appcompat:appcompat:1.7.1] C:\Users\vbant\.gradle\caches\8.13\transforms\b9cd3491d489ade1e0dc34728f150fff\transformed\appcompat-1.7.1\AndroidManifest.xml:5:5-44
+MERGED from [com.firebaseui:firebase-ui-firestore:8.0.2] C:\Users\vbant\.gradle\caches\8.13\transforms\6e3e077fce229ecb5c7f19a3a1824ab0\transformed\firebase-ui-firestore-8.0.2\AndroidManifest.xml:5:5-7:41
+MERGED from [com.firebaseui:firebase-ui-firestore:8.0.2] C:\Users\vbant\.gradle\caches\8.13\transforms\6e3e077fce229ecb5c7f19a3a1824ab0\transformed\firebase-ui-firestore-8.0.2\AndroidManifest.xml:5:5-7:41
 MERGED from [com.google.firebase:firebase-auth:24.0.1] C:\Users\vbant\.gradle\caches\8.13\transforms\0a9ddfb940821e14effaa67c7cdfe220\transformed\firebase-auth-24.0.1\AndroidManifest.xml:21:5-23:151
 MERGED from [com.google.firebase:firebase-auth:24.0.1] C:\Users\vbant\.gradle\caches\8.13\transforms\0a9ddfb940821e14effaa67c7cdfe220\transformed\firebase-auth-24.0.1\AndroidManifest.xml:21:5-23:151
 MERGED from [androidx.credentials:credentials:1.2.0-rc01] C:\Users\vbant\.gradle\caches\8.13\transforms\8614c13ce434cae0387e9f80a8bd2817\transformed\credentials-1.2.0-rc01\AndroidManifest.xml:5:5-44
@@ -345,6 +364,8 @@ MERGED from [com.github.bumptech.glide:glide:4.16.0] C:\Users\vbant\.gradle\cach
 MERGED from [com.github.bumptech.glide:glide:4.16.0] C:\Users\vbant\.gradle\caches\8.13\transforms\251ec883dfa63f3e1dd12bbcce706a21\transformed\glide-4.16.0\AndroidManifest.xml:5:5-7:41
 MERGED from [androidx.viewpager2:viewpager2:1.0.0] C:\Users\vbant\.gradle\caches\8.13\transforms\e0bc8b3932fdc9b38b5cf9322961595a\transformed\viewpager2-1.0.0\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.viewpager2:viewpager2:1.0.0] C:\Users\vbant\.gradle\caches\8.13\transforms\e0bc8b3932fdc9b38b5cf9322961595a\transformed\viewpager2-1.0.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.legacy:legacy-support-v4:1.0.0] C:\Users\vbant\.gradle\caches\8.13\transforms\0a3b40340e2be86423ec901d56f3eb05\transformed\legacy-support-v4-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-v4:1.0.0] C:\Users\vbant\.gradle\caches\8.13\transforms\0a3b40340e2be86423ec901d56f3eb05\transformed\legacy-support-v4-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [com.google.firebase:firebase-firestore:26.0.0] C:\Users\vbant\.gradle\caches\8.13\transforms\701eb0f6bffb2887f0fb67bfcbafe98b\transformed\firebase-firestore-26.0.0\AndroidManifest.xml:6:5-44
 MERGED from [com.google.firebase:firebase-firestore:26.0.0] C:\Users\vbant\.gradle\caches\8.13\transforms\701eb0f6bffb2887f0fb67bfcbafe98b\transformed\firebase-firestore-26.0.0\AndroidManifest.xml:6:5-44
 MERGED from [com.google.android.gms:play-services-auth-api-phone:18.0.2] C:\Users\vbant\.gradle\caches\8.13\transforms\3f8f370145f8a8f8934fab0436ad0eca\transformed\play-services-auth-api-phone-18.0.2\AndroidManifest.xml:5:5-44
@@ -375,6 +396,8 @@ MERGED from [com.google.android.gms:play-services-auth-base:18.0.4] C:\Users\vba
 MERGED from [com.google.android.gms:play-services-auth-base:18.0.4] C:\Users\vbant\.gradle\caches\8.13\transforms\21360395ab3c7e44caeed7655f343912\transformed\play-services-auth-base-18.0.4\AndroidManifest.xml:5:5-44
 MERGED from [com.google.android.gms:play-services-fido:20.1.0] C:\Users\vbant\.gradle\caches\8.13\transforms\513980683677119ebd336be5c2db1acf\transformed\play-services-fido-20.1.0\AndroidManifest.xml:5:5-44
 MERGED from [com.google.android.gms:play-services-fido:20.1.0] C:\Users\vbant\.gradle\caches\8.13\transforms\513980683677119ebd336be5c2db1acf\transformed\play-services-fido-20.1.0\AndroidManifest.xml:5:5-44
+MERGED from [androidx.paging:paging-rxjava3:3.0.0] C:\Users\vbant\.gradle\caches\8.13\transforms\6ac627be61773fa7886e54fc0aaf8b2f\transformed\paging-rxjava3-3.0.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.paging:paging-rxjava3:3.0.0] C:\Users\vbant\.gradle\caches\8.13\transforms\6ac627be61773fa7886e54fc0aaf8b2f\transformed\paging-rxjava3-3.0.0\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.datastore:datastore-core-android:1.1.3] C:\Users\vbant\.gradle\caches\8.13\transforms\0971b9b1955c1cc97a83be742d962781\transformed\datastore-core-release\AndroidManifest.xml:5:5-44
 MERGED from [androidx.datastore:datastore-core-android:1.1.3] C:\Users\vbant\.gradle\caches\8.13\transforms\0971b9b1955c1cc97a83be742d962781\transformed\datastore-core-release\AndroidManifest.xml:5:5-44
 MERGED from [androidx.datastore:datastore-android:1.1.3] C:\Users\vbant\.gradle\caches\8.13\transforms\0a0d563d46c6214c11edfe3398885ae3\transformed\datastore-release\AndroidManifest.xml:20:5-44
@@ -397,6 +420,8 @@ MERGED from [androidx.emoji2:emoji2-views-helper:1.3.0] C:\Users\vbant\.gradle\c
 MERGED from [androidx.emoji2:emoji2-views-helper:1.3.0] C:\Users\vbant\.gradle\caches\8.13\transforms\61b82acd35e83e2ee31a73e9496c8ab0\transformed\emoji2-views-helper-1.3.0\AndroidManifest.xml:5:5-44
 MERGED from [androidx.emoji2:emoji2:1.3.0] C:\Users\vbant\.gradle\caches\8.13\transforms\8b897ea9378b5aa08581582f853a4316\transformed\emoji2-1.3.0\AndroidManifest.xml:21:5-44
 MERGED from [androidx.emoji2:emoji2:1.3.0] C:\Users\vbant\.gradle\caches\8.13\transforms\8b897ea9378b5aa08581582f853a4316\transformed\emoji2-1.3.0\AndroidManifest.xml:21:5-44
+MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] C:\Users\vbant\.gradle\caches\8.13\transforms\8ded80f716141f20ef829f210cc9a424\transformed\legacy-support-core-ui-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] C:\Users\vbant\.gradle\caches\8.13\transforms\8ded80f716141f20ef829f210cc9a424\transformed\legacy-support-core-ui-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.drawerlayout:drawerlayout:1.1.1] C:\Users\vbant\.gradle\caches\8.13\transforms\ca4943d78be86ebf3e6a28f1472f6bd2\transformed\drawerlayout-1.1.1\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.drawerlayout:drawerlayout:1.1.1] C:\Users\vbant\.gradle\caches\8.13\transforms\ca4943d78be86ebf3e6a28f1472f6bd2\transformed\drawerlayout-1.1.1\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] C:\Users\vbant\.gradle\caches\8.13\transforms\5bd90c6535a2d434b0be32e58c953a58\transformed\coordinatorlayout-1.1.0\AndroidManifest.xml:20:5-22:41
@@ -417,18 +442,28 @@ MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] C:\Users\vbant\.gr
 MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] C:\Users\vbant\.gradle\caches\8.13\transforms\f118d0cb6b4ea562705935110ded9301\transformed\legacy-support-core-utils-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.loader:loader:1.0.0] C:\Users\vbant\.gradle\caches\8.13\transforms\9ae7a1dbe4469cab9e0ee7c8ac0a2df9\transformed\loader-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.loader:loader:1.0.0] C:\Users\vbant\.gradle\caches\8.13\transforms\9ae7a1dbe4469cab9e0ee7c8ac0a2df9\transformed\loader-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.recyclerview:recyclerview:1.2.1] C:\Users\vbant\.gradle\caches\8.13\transforms\3294798f9e7bbfd23009d92c210419cc\transformed\recyclerview-1.2.1\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.recyclerview:recyclerview:1.2.1] C:\Users\vbant\.gradle\caches\8.13\transforms\3294798f9e7bbfd23009d92c210419cc\transformed\recyclerview-1.2.1\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\vbant\.gradle\caches\8.13\transforms\96aaecafe5006d50eb9be0cca8b95589\transformed\viewpager-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\vbant\.gradle\caches\8.13\transforms\96aaecafe5006d50eb9be0cca8b95589\transformed\viewpager-1.0.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.recyclerview:recyclerview:1.1.0] C:\Users\vbant\.gradle\caches\8.13\transforms\c24f24e42159b60dd67eee4fa64e36b8\transformed\recyclerview-1.1.0\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.recyclerview:recyclerview:1.1.0] C:\Users\vbant\.gradle\caches\8.13\transforms\c24f24e42159b60dd67eee4fa64e36b8\transformed\recyclerview-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] C:\Users\vbant\.gradle\caches\8.13\transforms\8805d6a7784448ae221388f76c0b5e7b\transformed\slidingpanelayout-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] C:\Users\vbant\.gradle\caches\8.13\transforms\8805d6a7784448ae221388f76c0b5e7b\transformed\slidingpanelayout-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.customview:customview:1.1.0] C:\Users\vbant\.gradle\caches\8.13\transforms\ef7ec8914ce008dd1506fc4a5529bea3\transformed\customview-1.1.0\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.customview:customview:1.1.0] C:\Users\vbant\.gradle\caches\8.13\transforms\ef7ec8914ce008dd1506fc4a5529bea3\transformed\customview-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.media:media:1.0.0] C:\Users\vbant\.gradle\caches\8.13\transforms\47733658d5fab61cadd10961ecafe715\transformed\media-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.media:media:1.0.0] C:\Users\vbant\.gradle\caches\8.13\transforms\47733658d5fab61cadd10961ecafe715\transformed\media-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] C:\Users\vbant\.gradle\caches\8.13\transforms\bad98fd2f7bce9a67e65db9edd37564b\transformed\swiperefreshlayout-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] C:\Users\vbant\.gradle\caches\8.13\transforms\bad98fd2f7bce9a67e65db9edd37564b\transformed\swiperefreshlayout-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] C:\Users\vbant\.gradle\caches\8.13\transforms\7c6b7fe566df322d086277dc379680be\transformed\asynclayoutinflater-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] C:\Users\vbant\.gradle\caches\8.13\transforms\7c6b7fe566df322d086277dc379680be\transformed\asynclayoutinflater-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [com.google.firebase:firebase-database-collection:18.0.1] C:\Users\vbant\.gradle\caches\8.13\transforms\5bc8538275bc5a453cd09dc43139a709\transformed\firebase-database-collection-18.0.1\AndroidManifest.xml:5:5-7:41
 MERGED from [com.google.firebase:firebase-database-collection:18.0.1] C:\Users\vbant\.gradle\caches\8.13\transforms\5bc8538275bc5a453cd09dc43139a709\transformed\firebase-database-collection-18.0.1\AndroidManifest.xml:5:5-7:41
 MERGED from [com.google.android.gms:play-services-base:18.5.0] C:\Users\vbant\.gradle\caches\8.13\transforms\96c0132b4d11abb73c448a8e9cd522b1\transformed\play-services-base-18.5.0\AndroidManifest.xml:3:5-44
 MERGED from [com.google.android.gms:play-services-base:18.5.0] C:\Users\vbant\.gradle\caches\8.13\transforms\96c0132b4d11abb73c448a8e9cd522b1\transformed\play-services-base-18.5.0\AndroidManifest.xml:3:5-44
 MERGED from [androidx.core:core:1.13.0] C:\Users\vbant\.gradle\caches\8.13\transforms\099480ad6f7c73f223a215beb2ae3c7e\transformed\core-1.13.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.core:core:1.13.0] C:\Users\vbant\.gradle\caches\8.13\transforms\099480ad6f7c73f223a215beb2ae3c7e\transformed\core-1.13.0\AndroidManifest.xml:20:5-44
+MERGED from [com.firebaseui:firebase-ui-common:8.0.2] C:\Users\vbant\.gradle\caches\8.13\transforms\322fbf45addeff07865f0081f60eae73\transformed\firebase-ui-common-8.0.2\AndroidManifest.xml:5:5-7:41
+MERGED from [com.firebaseui:firebase-ui-common:8.0.2] C:\Users\vbant\.gradle\caches\8.13\transforms\322fbf45addeff07865f0081f60eae73\transformed\firebase-ui-common-8.0.2\AndroidManifest.xml:5:5-7:41
 MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.6.2] C:\Users\vbant\.gradle\caches\8.13\transforms\fd1a1ac8ee2e2609373d9543f4b3acb9\transformed\lifecycle-viewmodel-2.6.2\AndroidManifest.xml:20:5-44
 MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.6.2] C:\Users\vbant\.gradle\caches\8.13\transforms\fd1a1ac8ee2e2609373d9543f4b3acb9\transformed\lifecycle-viewmodel-2.6.2\AndroidManifest.xml:20:5-44
 MERGED from [androidx.lifecycle:lifecycle-process:2.6.2] C:\Users\vbant\.gradle\caches\8.13\transforms\9c6f6739b72b4cd8581425a08e64a1d4\transformed\lifecycle-process-2.6.2\AndroidManifest.xml:21:5-44

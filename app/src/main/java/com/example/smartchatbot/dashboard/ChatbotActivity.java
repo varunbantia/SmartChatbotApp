@@ -13,6 +13,7 @@ import android.speech.tts.TextToSpeech;
 import android.speech.tts.UtteranceProgressListener;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
@@ -37,6 +38,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.smartchatbot.R;
 import com.example.smartchatbot.api.ChatbotApi;
 import com.example.smartchatbot.chatbot.ChatAdapter;
+import com.example.smartchatbot.chatbot.ChatHistoryActivity;
 import com.example.smartchatbot.chatbot.ChatMessage;
 import com.example.smartchatbot.counseling.CounselingFragment;
 import com.example.smartchatbot.jobs.JobsFragment;
@@ -47,10 +49,13 @@ import com.example.smartchatbot.skills.SkillsFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.SetOptions;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -107,10 +112,10 @@ public class ChatbotActivity extends AppCompatActivity implements ChatAdapter.On
     private final Handler chatSeekBarHandler = new Handler();
 
     // --- State Management for TTS and Preferences ---
-    private SharedPreferences prefs;
-    private boolean isAutoSpeakEnabled = true;
-    private String currentlySpeakingText = null;
 
+
+    private String currentlySpeakingText = null;
+    private String currentChatId = null;
     private static final int PERMISSION_REQUEST_CODE = 200;
 
     @Override
@@ -118,28 +123,78 @@ public class ChatbotActivity extends AppCompatActivity implements ChatAdapter.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chatbot);
 
-        prefs = getSharedPreferences("ChatbotPrefs", MODE_PRIVATE);
-        loadAutoSpeakPreference();
 
         initializeViews();
+        setupFirebase();
         setupRecyclerView();
         setupFirebase();
         setupTts();
         setupRetrofit();
         setupInputListeners();
         setupMenuListener();
+        if (getIntent().hasExtra("CHAT_ID")) {
+            currentChatId = getIntent().getStringExtra("CHAT_ID");
+            loadChatHistory(currentChatId);
+        } else {
+            // This is a new chat. The listener will be attached when the first message is sent.
+            // You can add a local-only welcome message if you want.
+            chatMessages.add(new ChatMessage("Hello! How can I assist you today?", ChatMessage.TYPE_BOT));
+            chatAdapter.notifyItemInserted(chatMessages.size() - 1);
+        }
+    }
+    private void saveMessage(ChatMessage message) {
+        String uid = mAuth.getCurrentUser().getUid();
+        if (uid == null) {
+            Log.e("Firestore", "Cannot save message, user is not logged in.");
+            return;
+        }
+
+        // If this is the first message of a new chat, create the chat document ID
+        if (currentChatId == null) {
+            currentChatId = db.collection("users").document(uid).collection("chats").document().getId();
+            // Attach the listener to this new chat session
+            loadChatHistory(currentChatId);
+        }
+
+        // Save the message to the 'messages' sub-collection
+        db.collection("users").document(uid).collection("chats").document(currentChatId)
+                .collection("messages").add(message);
+
+        // Update the 'lastMessage' and 'timestamp' on the parent chat document
+        Map<String, Object> sessionData = new HashMap<>();
+        sessionData.put("lastMessage", message.getMessage());
+        sessionData.put("timestamp", new Date());
+        db.collection("users").document(uid).collection("chats").document(currentChatId)
+                .set(sessionData, SetOptions.merge());
+    }
+    private void loadChatHistory(String chatId) {
+        String uid = mAuth.getCurrentUser().getUid();
+        if (uid == null) return;
+
+        db.collection("users").document(uid).collection("chats").document(chatId)
+                .collection("messages").orderBy("timestamp", Query.Direction.ASCENDING)
+                .addSnapshotListener((snapshots, error) -> {
+                    if (error != null) {
+                        Log.e("Firestore", "Listen failed.", error);
+                        return;
+                    }
+                    if (snapshots == null) return;
+
+                    chatMessages.clear(); // Clear the local list
+                    for (DocumentSnapshot doc : snapshots.getDocuments()) {
+                        ChatMessage msg = doc.toObject(ChatMessage.class);
+                        if (msg != null) {
+                            chatMessages.add(msg); // Repopulate with data from Firestore
+                        }
+                    }
+                    chatAdapter.notifyDataSetChanged();
+                    recyclerView.scrollToPosition(chatMessages.size() - 1);
+                });
     }
 
-    private void loadAutoSpeakPreference() {
-        isAutoSpeakEnabled = prefs.getBoolean("auto_speak_enabled", true);
-    }
 
-    private void saveAutoSpeakPreference(boolean isEnabled) {
-        isAutoSpeakEnabled = isEnabled;
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putBoolean("auto_speak_enabled", isEnabled);
-        editor.apply();
-    }
+
+
 
     private void setupTts() {
         tts = new TextToSpeech(this, status -> {
@@ -193,6 +248,10 @@ public class ChatbotActivity extends AppCompatActivity implements ChatAdapter.On
     }
 
     private void sendMessageToBot(String userMessage) {
+        // First, save the user's message
+        addUserMessage(userMessage, null);
+
+        // Then, send it to the bot API
         Map<String, String> body = new HashMap<>();
         body.put("message", userMessage);
         api.sendMessage(body).enqueue(new Callback<Map<String, String>>() {
@@ -200,15 +259,13 @@ public class ChatbotActivity extends AppCompatActivity implements ChatAdapter.On
             public void onResponse(@NonNull Call<Map<String, String>> call, @NonNull Response<Map<String, String>> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     String reply = response.body().get("reply");
+                    // Save the bot's reply
                     addBotMessage(reply);
-                    if (isAutoSpeakEnabled) {
-                        speakText(reply);
-                    }
+
                 } else {
                     addBotMessage("⚠️ Failed to get response from server.");
                 }
             }
-
             @Override
             public void onFailure(@NonNull Call<Map<String, String>> call, @NonNull Throwable t) {
                 addBotMessage("❌ Error: " + t.getMessage());
@@ -216,12 +273,13 @@ public class ChatbotActivity extends AppCompatActivity implements ChatAdapter.On
         });
     }
 
+
     private void setupMenuListener() {
         btnMenu.setOnClickListener(v -> {
             PopupMenu popup = new PopupMenu(ChatbotActivity.this, v);
             popup.getMenuInflater().inflate(R.menu.chatbot_menu, popup.getMenu());
 
-            popup.getMenu().findItem(R.id.menu_auto_speak).setChecked(isAutoSpeakEnabled);
+
 
             popup.setOnMenuItemClickListener(item -> {
                 int id = item.getItemId();
@@ -240,11 +298,12 @@ public class ChatbotActivity extends AppCompatActivity implements ChatAdapter.On
                 } else if (id == R.id.menu_settings) {
                     startActivity(new Intent(ChatbotActivity.this, SettingsActivity.class));
                     return true;
-                } else if (id == R.id.menu_auto_speak) {
-                    boolean newState = !item.isChecked();
-                    item.setChecked(newState);
-                    saveAutoSpeakPreference(newState);
-                    return false;
+                } else if (id == R.id.menu_history) {
+                    Intent intent = new Intent(ChatbotActivity.this, ChatHistoryActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                    finish(); // Close the current chat screen
+                    return true;
                 }
                 return false;
             });
@@ -293,7 +352,7 @@ public class ChatbotActivity extends AppCompatActivity implements ChatAdapter.On
         logging.setLevel(HttpLoggingInterceptor.Level.BODY);
         OkHttpClient client = new OkHttpClient.Builder().addInterceptor(logging).build();
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.29.140:5000/")
+                .baseUrl("https://smartchatbotbackend.onrender.com/")
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
@@ -321,7 +380,6 @@ public class ChatbotActivity extends AppCompatActivity implements ChatAdapter.On
         btnSend.setOnClickListener(v -> {
             String message = etMessage.getText().toString().trim();
             if (!message.isEmpty()) {
-                addUserMessage(message, null);
                 etMessage.setText("");
                 sendMessageToBot(message);
             }
@@ -606,15 +664,17 @@ public class ChatbotActivity extends AppCompatActivity implements ChatAdapter.On
         } else {
             chatMessage = new ChatMessage(message, ChatMessage.TYPE_USER_TEXT);
         }
-        chatMessages.add(chatMessage);
-        chatAdapter.notifyItemInserted(chatMessages.size() - 1);
-        recyclerView.scrollToPosition(chatMessages.size() - 1);
+        // The listener will automatically update the screen after the save is complete.
+        saveMessage(chatMessage);
     }
 
+    // ✅ CORRECTED: This method ONLY saves the bot's message.
     private void addBotMessage(String message) {
-        chatMessages.add(new ChatMessage(message, ChatMessage.TYPE_BOT));
-        chatAdapter.notifyItemInserted(chatMessages.size() - 1);
-        recyclerView.scrollToPosition(chatMessages.size() - 1);
+        ChatMessage chatMessage = new ChatMessage(message, ChatMessage.TYPE_BOT);
+        // Only save if the conversation has been started (currentChatId is not null)
+        if (currentChatId != null) {
+            saveMessage(chatMessage);
+        }
     }
 
     private void loadUserNameAndCheckProfile() {
